@@ -59,8 +59,12 @@ function BlackJack(){
         player.get_card(card);
    }
 }
+function handleDrawClick(){
+    game.draw_card(anthony,new_deck)
+}
+
 function addClickHandlers(){
-    $('#draw_card').click(game.draw_card(anthony,new_deck)
+    $('#draw_card').click(handleDrawClick);
 }
 function init(){
     game = new BlackJack();
