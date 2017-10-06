@@ -60,12 +60,12 @@ function BlackJack(){
    }
 }
 function addClickHandlers(){
-    $('#draw_card').click(game.draw_card(anthony,new_deck.deck))
+    $('#draw_card').click(game.draw_card(anthony,new_deck)
 }
 function init(){
     game = new BlackJack();
     new_deck =  new CreateDeck();
     game.start_game(new_deck);
-    addClickHandlers();
     anthony = new Player();
+    addClickHandlers();
 }
