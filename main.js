@@ -54,8 +54,8 @@ function BlackJack(){
         deck.shuffleDeck();
         console.log(deck.deck);
     }
-   this.draw_card = function(player,deck){
-        var card  = deck.deck.pop();
+   this.draw_card = function(player,game){
+        var card  = game.deck.pop();
         player.get_card(card);
    }
 }
