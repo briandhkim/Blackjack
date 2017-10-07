@@ -1,6 +1,9 @@
 $(document).ready(init);
 var game =null;
 
+var view = null;
+
+
 function CreateDeck(){
     this.deck=[];
     this.create_cards = function(){
@@ -52,6 +55,9 @@ function Player(){
 }
 
 
+
+   };
+
 function BlackJack(){
     this.players_array = []
         //['dealer':Dealer];
@@ -64,10 +70,18 @@ function BlackJack(){
     }
     this.playerTurn = 0;
     this.dealer = new Player();
+
    this.check_bust = function(player){
        if(player.score>21){
            console.log("player loses");
        }
+
+   };
+   this.compare_score =  function(){
+       if(this.player_stay){
+
+       }
+
    }
    // this.compare_score =  function(player){
    //     if(player.stay&&this.dealer.stay){
@@ -102,5 +116,33 @@ function addClickHandlers(){
 }
 function init(){
     game = new BlackJack();
+
+    new_deck =  new CreateDeck();
+    view = new View();
+    game.start_game(new_deck);
+    anthony = new Player();
+    addClickHandlers();
     game.start_game();
+}
+
+function View(){
+    this.createCardDom = function(card, playerSpaceID){
+        var cardImage = "images/" + card.value + "_" + card.suit + ".png";
+        console.log('url(' + cardImage + ')');
+        var cardDiv = $("<div>")
+            .css("width", "50px")
+            .css("height", "70px")
+            .css("background-image", 'url(' + cardImage + ')')
+            .css("background-size", "100% 100%")
+            .css("background-repeat", "no-repeat")
+            .css("display", "inline-block");
+        $(playerSpaceID).append(cardDiv);
+    }
+}
+
+function AudioHandler(){
+    this.cardFlip = function(){
+        var audio = new Audio("audio/flip.wav");
+        audio.play();
+    };
 }
