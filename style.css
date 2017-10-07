@@ -1,0 +1,41 @@
+html,body{
+	overflow-x:hidden;
+}
+body > .container-fluid{
+	height: 100vh;
+}
+.buttonAndDisplay{
+	height: 83%;
+	border: 1px solid;
+}
+.buttonArea{
+	height: 90%;
+	margin-top: 2.5%;
+	border: 1px solid orange;
+}
+.gameTitle{
+	height: 10%;
+}
+.gameStartInput{
+	height: 8%;
+}
+.gameStartInput > .row{
+	height: 50%;
+}
+.displayFiller{
+	height: 40%;
+}
+.playerTurnButtons{
+	height: 30%;
+	border: 1px solid orange;
+}
+
+.gameDisplayArea{
+	height: 95%;
+	margin-top: 1%;
+	border: 1px solid green;
+}
+.statusDisplay{
+	height: 17%;
+	border: 1px solid;
+}
