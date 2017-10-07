@@ -139,6 +139,31 @@ function Player(){
             }
         }
         game.changePlayerTurn();
+    };
+    this.dealerAI = function(){
+        console.log("Dealer AI");
+        if(this.ID === 0){
+            this.calculator_score();
+            var highestScore = 0;
+            for(var i = 1; i <game.players_array.length; i++){
+                if(game.players_array[i].score > 16){
+                    highestScore = game.players_array[i].score;
+                }
+            }
+            while(this.score < highestScore && this.score !== 0){
+                console.log(this.score);
+                this.get_card();
+            }
+            view.revealDealerCard();
+            if(this.score >= highestScore){
+                console.log("DEALER WINS");
+                console.log(highestScore)
+            }
+            else{
+                console.log("non busted people win!");
+                console.log(highestScore)
+            }
+        }
     }
 }
 function BlackJack(){
@@ -177,12 +202,15 @@ function BlackJack(){
         $(newPlayerDiv).css("border", "5px solid gold").removeClass("overlay");
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
         $('#player_number').text(this.playerTurn);
-        if(self.playerTurn ==0){
+
+        if(self.playerTurn ===0){
             $('#player_number').text('Dealer'); 
             $('.cpuText').addClass('dealerTurnText');
+            this.players_array[0].dealerAI();
         }else if(self.playerTurn >0){
             $('#player_number').text(self.playerTurn);
             $('.cpuText').removeClass('dealerTurnText');
+
         }
     };
    this.compare_score =  function(){
