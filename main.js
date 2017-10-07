@@ -32,33 +32,50 @@ function CreateDeck(){
 }//end object
 
 function Player(){
+    this.bust = false;
     this.hand = [];
     this.score = 0;
-    this.stay = false;
+    this.staying = false;
     this.get_card = function(deck){
         this.hand.push(deck.pop());
         console.log('hand',this.hand);
         this.calculator_score();
         console.log('score',this.score)
     };
+    this.check_bust = function(player){
+        if(player.score>21){
+            this.bust = true;
+            console.log("player has busted");
+        }
+    };
     this.calculator_score = function(){
         this.score = 0;
-        for(var i = 0; i<this.hand.length; i++){
-            if(this.hand[i].value>10){
-                this.score += 10;
-            }
-            else{
-                this.score += this.hand[i].value;
-            }
+        if(this.bust){
+            score = 0;
         }
-        for(var i = 0; i<this.hand.length; i++){//convert Ace to 11 or 1
-            if(this.hand[i].value === 1 && this.score<=11){
-                this.score += 10;
+        else{
+            for(var i = 0; i<this.hand.length; i++){
+                if(this.hand[i].value>10){
+                    this.score += 10;
+                }
+                else{
+                    this.score += this.hand[i].value;
+                }
             }
+            for(var i = 0; i<this.hand.length; i++){//convert Ace to 11 or 1
+                if(this.hand[i].value === 1 && this.score<=11){
+                    this.score += 10;
+                }
+            }
+            if(this.score === 21){
+                this.stay();
+            }
+            this.check_bust();
         }
     };
     this.stay = function(){
         this.staying  = true;
+        game.playerTurn ++;
     }
 }
 function BlackJack(){
@@ -79,29 +96,7 @@ function BlackJack(){
             this.players_array.push(player);
         }
     };
-    this.nextPlayerTurn = function(){
-        if(this.playerTurn !== this.players_array.length-1){
-            this.playerTurn += 1;
-        }
-        else{
-            this.playerTurn = 0;
-        }
-    };
-
-    this.draw = function(){
-        this.players_array[this.playerTurn].get_card(this.deck);
-    };
-
-   this.check_bust = function(player){
-       if(player.score>21){
-           console.log("player loses");
-       }
-
-   };
    this.compare_score =  function(){
-       if(this.player_stay){
-
-       }
 
    };
     this.start_game = function(){
@@ -118,11 +113,12 @@ function BlackJack(){
     }
 }
 function handleDrawClick(){
-
+    var position = game.playerTurn;
+    game.players_array[position].get_card();
 }
 function handleStayClick(){
     var position = game.playerTurn;
-    game.players_array[position].get_card();
+    game.players_array[position].stay;
 }
 function addClickHandlers(){
     $('#draw_card').click(handleDrawClick);
