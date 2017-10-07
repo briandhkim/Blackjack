@@ -89,40 +89,37 @@ function Player(){
     };
     this.calculator_score = function(){
         this.score = 0;
+
+        for(var i = 0; i<this.hand.length; i++){
+            if(this.hand[i].value>10){
+                this.score += 10;
+            }
+            else{
+                this.score += this.hand[i].value;
+            }
+        }
+        for(var i = 0; i<this.hand.length; i++){//convert Ace to 11 or 1
+            if(this.hand[i].value === 1 && this.score<=11){
+                this.score += 10;
+            }
+        }
+        if(this.score === 21){
+            this.stay();
+            if (this.ID !== 0) {
+                $('#modal').css('display', 'block').text('21!').css("color", "green");
+                $('#modal_overlay').css('display', 'block');
+                setTimeout(make_modals_disappear, 1000);
+            }
+        }
+        if(this.hand.length>2 && this.score !== 21){
+            if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
+            }
+        }
+        this.check_bust();
         if(this.bust){
             this.score = 0;
         }
-        else{
-            for(var i = 0; i<this.hand.length; i++){
-                if(this.hand[i].value>10){
-                    this.score += 10;
-                }
-                else{
-                    this.score += this.hand[i].value;
-                }
-            }
-            for(var i = 0; i<this.hand.length; i++){//convert Ace to 11 or 1
-                if(this.hand[i].value === 1 && this.score<=11){
-                    this.score += 10;
-                }
-            }
-            if(this.score === 21){
-                this.stay();
-                if (this.ID !== 0) {
-                    $('#modal').css('display', 'block').text('21!').css("color", "green");
-                    $('#modal_overlay').css('display', 'block');
-                    setTimeout(make_modals_disappear, 1000);
-                }
-            }
-            if(this.hand.length>2 && this.score !== 21){
-                if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
-                    messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
-                }
-            }
-
-            this.check_bust();
-        }
-
     };
     this.stay = function(){
         this.staying = true;
@@ -138,6 +135,30 @@ function Player(){
             }
         }
         game.changePlayerTurn();
+    };
+    this.dealerAI = function(){
+        console.log("Dealer AI");
+        if(this.ID === 0){
+            var highestScore = 16;
+            for(var i = 1; i <game.players_array.length; i++){
+                if(game.players_array[i].score > 16){
+                    highestScore = game.players_array[i].score;
+                }
+            }
+            while(this.score < highestScore && this.score !== 0){
+                console.log(this.score);
+                this.get_card();
+            }
+            view.revealDealerCard();
+            if(this.score >= highestScore){
+                console.log("DEALER WINS")
+                console.log(highestScore)
+            }
+            else{
+                console.log("non busted people win!")
+                console.log(highestScore)
+            }
+        }
     }
 }
 function BlackJack(){
@@ -176,7 +197,10 @@ function BlackJack(){
         $(newPlayerDiv).css("border", "5px solid gold").removeClass("overlay");
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
         $('#player_number').text(this.playerTurn);
-        self.players_array[this.playerTurn].calculator_score();
+        // self.players_array[this.playerTurn].calculator_score();
+        if(self.playerTurn === 0){
+            this.players_array[0].dealerAI();
+        }
     };
    this.compare_score =  function(){
        var dealer_win = true;
