@@ -116,10 +116,7 @@ function Player(){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
                 view.revealDealerCard();
             }
-            else{
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
-            }
-
+            messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
         }
         game.changePlayerTurn();
     }
