@@ -135,6 +135,7 @@ function BlackJack(){
         self.deal_cards();
         console.log('players',this.players_array);
         console.log(this.deck);
+        $('#start_butt').addClass('disabled');
     }
 }
 function handleDrawClick(){

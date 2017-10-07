@@ -139,6 +139,7 @@ body > .container-fluid{
 	display:none;
 	font-size:3em;
 	color:red;
+	text-align: center;
 }
 #modal_overlay{
 	position:fixed;
