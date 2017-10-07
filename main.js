@@ -2,7 +2,7 @@ $(document).ready(init);
 var new_deck = null;
 var anthony = null;
 var game =null;
-var visual = null;
+var view = null;
 
 function CreateDeck(){
     this.deck=[];
@@ -88,7 +88,7 @@ function addClickHandlers(){
 function init(){
     game = new BlackJack();
     new_deck =  new CreateDeck();
-    visual = new Visual();
+    view = new View();
     game.start_game(new_deck);
     anthony = new Player();
     addClickHandlers();
@@ -100,7 +100,7 @@ function init(){
     $(testCard).css("background-image", "images/")
 }
 
-function Visual(){
+function View(){
     this.createCardDom = function(card, playerSpaceID){
         var cardImage = "images/" + card.value + "_" + card.suit + ".png";
         console.log('url(' + cardImage + ')');
@@ -113,4 +113,11 @@ function Visual(){
             .css("display", "inline-block");
         $(playerSpaceID).append(cardDiv);
     }
+}
+
+function AudioHandler(){
+    this.cardFlip = function(){
+        var audio = new Audio("audio/flip.wav");
+        audio.play();
+    };
 }
