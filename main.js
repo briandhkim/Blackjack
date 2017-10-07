@@ -76,7 +76,7 @@ function Player(){
             if(game.playerTurn !== 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
                 console.log("player has busted");
-                $('#modal').css('display','block').text('BUSTED!').css("color", "red").append(recorderMeme);
+                $('#modal').css('display','block').text('BUSTED!').css("color", "red")/*.append(recorderMeme)*/;
 
                 $('#modal_overlay').css('display','block');
                 setTimeout(make_modals_disappear,1000);
