@@ -14,10 +14,10 @@ body > .container-fluid{
 	border: 1px solid orange;
 }
 .gameTitle{
-	height: 10%;
+	height: 15%;
 }
 .gameStartInput{
-	height: 8%;
+	height: 5%;
 }
 .gameStartInput > .row{
 	height: 50%;
