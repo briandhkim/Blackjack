@@ -177,6 +177,9 @@ function handleDrawClick(){
     game.players_array[position].get_card();
     audioHandler.cardFlip();
 }
+function handleReset(){
+   reset();
+}
 function handleStayClick(){
     var position = game.playerTurn;
     game.players_array[position].stay();
@@ -185,6 +188,7 @@ function addClickHandlers(){
     $('#draw_card').click(handleDrawClick);
     $('#stay').click(handleStayClick);
     $('#start_butt').click(handleStartClick);
+    $('#reset_butt').click(handleReset);
 }
 function init(){
     game = new BlackJack();
@@ -195,6 +199,11 @@ function init(){
     addClickHandlers();
 }
 function handleStartClick(){
+    game.start_game();
+}
+function reset(){
+    $('.hiddenCard').remove();
+    $('.displayedCard').remove();
     game.start_game();
 }
 function View(){
@@ -235,7 +244,7 @@ function AudioHandler(){
 function MessageHandler(){
     this.messages = [];
     this.logMessage = function(message){
-        this.messages.unshift(message)
+        this.messages.unshift(message);
         if(this.messages.length > 5){
             this.messages.pop();
         }
