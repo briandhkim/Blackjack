@@ -57,10 +57,12 @@ function Player(){
         if(this.hand.length > 2 && this.score !== 21) {
             messageHandler.logMessage(messageHandler.currentPlayerString() + "Hit me!");
         }
-        this.calculator_score();
-        view.createCardDom(cardDraw, this.ID)
+        if(this.hand.length > 2) {
+            this.calculator_score();
+            console.log('score',this.score)
+        }
+        view.createCardDom(cardDraw, this.ID);
         console.log('hand',this.hand);
-        console.log('score',this.score)
     };
     // var recorderVid = $('<iframe>',{
     //     class:'embed-responsive-item',
@@ -76,8 +78,8 @@ function Player(){
             if(game.playerTurn !== 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
                 console.log("player has busted");
-                $('#modal').css('display','block').text('BUSTED!');
-                // $('#modal').css('display','block').text('busted').append(recorderMeme);
+                $('#modal').css('display','block').text('BUSTED!').css("color", "red")/*.append(recorderMeme)*/;
+
                 $('#modal_overlay').css('display','block');
                 setTimeout(make_modals_disappear,1000);
             }
@@ -109,6 +111,11 @@ function Player(){
             }
             if(this.score === 21){
                 this.stay();
+                if (this.ID !== 0) {
+                    $('#modal').css('display', 'block').text('21!').css("color", "green");
+                    $('#modal_overlay').css('display', 'block');
+                    setTimeout(make_modals_disappear, 1000);
+                }
             }
             if(this.hand.length>2 && this.score !== 21){
                 if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
@@ -126,8 +133,11 @@ function Player(){
             if(this.ID === 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
                 view.revealDealerCard();
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score +".")
             }
-            messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
+            else{
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
+            }
         }
         game.changePlayerTurn();
     }
@@ -164,6 +174,7 @@ function BlackJack(){
             this.playerTurn = 0;
         }
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
+        this.players_array[this.playerTurn].calculator_score();
     };
    this.compare_score =  function(){
 
@@ -174,6 +185,7 @@ function BlackJack(){
         self.players_array = [];
         self.dealer.hand = 0;
         self.dealer.score = 0;
+        self.playerTurn = 1;
         var number_of_players = $('input[name=playerNum]:checked').val();
         self.addplayers(1 + parseInt(number_of_players));
         var new_deck =  new CreateDeck();
@@ -184,6 +196,7 @@ function BlackJack(){
         messageHandler.logMessage("Game started.  Good luck!");
         $('#start_butt').addClass('disabled');
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
+        this.players_array[this.playerTurn].calculator_score();
     }
 }
 function handleDrawClick(){
