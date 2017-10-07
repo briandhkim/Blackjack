@@ -123,6 +123,10 @@ body > .container-fluid{
 	margin-left: 5px;
 	margin-right: 5px;
 }
+.messageArea, .playerChipsArea{
+	height: 100%;
+	border: 1px solid orange;
+}
 
 ul#messageList{
 	list-style: none;
