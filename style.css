@@ -123,10 +123,14 @@ body > .container-fluid{
 	margin-left: 5px;
 	margin-right: 5px;
 }
+.messageArea, .playerChipsArea{
+	height: 100%;
+	border: 1px solid orange;
+}
 
 ul#messageList{
 	list-style: none;
-	font-size: 19px;
+	font-size: 18.5px;
 	/*color:#4db6ac;*/
 	color:whitesmoke;
 	font-family: 'Patrick Hand SC', cursive;
