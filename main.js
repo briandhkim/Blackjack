@@ -99,8 +99,10 @@ function Player(){
             if(this.score === 21){
                 this.stay();
             }
-            if(this.hand.length>2 && this.score !== 21 && this.ID !== 0){
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
+            if(this.hand.length>2 && this.score !== 21){
+                if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
+                    messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
+                }
             }
 
             this.check_bust();
@@ -114,10 +116,7 @@ function Player(){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
                 view.revealDealerCard();
             }
-            else{
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
-            }
-
+            messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
         }
         game.changePlayerTurn();
     }
@@ -153,6 +152,7 @@ function BlackJack(){
         else{
             this.playerTurn = 0;
         }
+        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
     };
    this.compare_score =  function(){
 
@@ -170,6 +170,7 @@ function BlackJack(){
         console.log(this.deck);
         messageHandler.logMessage("Game started.  Good luck!");
         $('#start_butt').addClass('disabled');
+        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
     }
 }
 function handleDrawClick(){
