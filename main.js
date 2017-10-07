@@ -1,6 +1,6 @@
 $(document).ready(init);
 var game =null;
-
+var anthony = null;
 var view = null;
 
 
