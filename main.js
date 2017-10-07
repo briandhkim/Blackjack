@@ -50,6 +50,14 @@ function Player(){
         this.staying  = true;
     }
 }
+
+
+
+
+
+
+
+
 function BlackJack(){
     this.deck;
     this.playerTurn = 0;
@@ -60,10 +68,11 @@ function BlackJack(){
             var player =  new Player();
             this.players_array.push(player);
         }
-    }
+    };
     this.draw = function(){
         this.players_array[this.playerTurn].get_card(this.deck);
     }
+
    this.check_bust = function(player){
        if(player.score>21){
            console.log("player loses");
@@ -75,7 +84,7 @@ function BlackJack(){
 
        }
 
-   }
+   };
    // this.compare_score =  function(player){
    //     if(player.stay&&this.dealer.stay){
    //          if(player.score>this.dealer.score){
