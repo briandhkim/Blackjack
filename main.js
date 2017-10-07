@@ -36,13 +36,15 @@ function make_modals_disappear(){
     $('#modal').css('display','none');
     // $('#recorderMeme').remove();
     $('#modal_overlay').css('display','none');
+    $('#modal').text('');
 }
 
 function Player(){
+    var self = this;
     this.ID = null;
     this.chips = 500;
     this.bet =function(){
-        this.chips-=50;
+        self.chips-=50;
     };
     this.bust = false;
     this.hand = [];
@@ -51,15 +53,15 @@ function Player(){
     this.get_card = function(){
         var cardDraw = game.deck.pop();
         this.hand.push(cardDraw);
-        if(this.hand.length > 2 && this.score !== 21) {
+        if(self.hand.length > 2 && self.score !== 21) {
             messageHandler.logMessage(messageHandler.currentPlayerString() + "Hit me!");
         }
         if(this.hand.length > 2) {
-            this.calculator_score();
-            console.log('score',this.score)
+            self.calculator_score();
+            console.log('score',self.score)
         }
-        view.createCardDom(cardDraw, this.ID);
-        console.log('hand',this.hand);
+        view.createCardDom(cardDraw, self.ID);
+        console.log('hand',self.hand);
     };
     // var recorderVid = $('<iframe>',{
     //     class:'embed-responsive-item',
@@ -70,8 +72,8 @@ function Player(){
     //     id: 'recorderMeme'
     // }).append(recorderVid);
     this.check_bust = function(){
-        if(this.score>21){
-            this.bust = true;
+        if(self.score>21){
+            self.bust = true;
             if(game.playerTurn !== 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
                 console.log("player has busted");
@@ -79,33 +81,35 @@ function Player(){
 
                 $('#modal_overlay').css('display','block');
                 setTimeout(make_modals_disappear,1000);
+                self.stay();
+                return;
             }
             else{
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!")
                 view.revealDealerCard();
+                self.stay();
+                return;
            }
-            this.stay();
         }
     };
     this.calculator_score = function(){
-        this.score = 0;
-
-        for(var i = 0; i<this.hand.length; i++){
-            if(this.hand[i].value>10){
-                this.score += 10;
+        self.score = 0;
+        for(var i = 0; i<self.hand.length; i++){
+            if(self.hand[i].value>10){
+                self.score += 10;
             }
             else{
-                this.score += this.hand[i].value;
+                self.score += this.hand[i].value;
             }
         }
-        for(var i = 0; i<this.hand.length; i++){//convert Ace to 11 or 1
-            if(this.hand[i].value === 1 && this.score<=11){
-                this.score += 10;
+        for(var i = 0; i<self.hand.length; i++){//convert Ace to 11 or 1
+            if(self.hand[i].value === 1 && self.score<=11){
+                self.score += 10;
             }
         }
-        if(this.score === 21){
-            this.stay();
-            if (this.ID !== 0) {
+        if(self.score === 21){
+            self.stay();
+            if (self.ID !== 0) {
                 $('#modal').css('display', 'block').text('21!').css("color", "green");
                 $('#modal_overlay').css('display', 'block');
                 setTimeout(make_modals_disappear, 1000);
@@ -117,8 +121,8 @@ function Player(){
             }
         }
         this.check_bust();
-        if(this.bust){
-            this.score = 0;
+        if(self.bust){
+            self.score = 0;
         }
     };
     this.stay = function(){
@@ -139,7 +143,8 @@ function Player(){
     this.dealerAI = function(){
         console.log("Dealer AI");
         if(this.ID === 0){
-            var highestScore = 16;
+            this.calculator_score();
+            var highestScore = 0;
             for(var i = 1; i <game.players_array.length; i++){
                 if(game.players_array[i].score > 16){
                     highestScore = game.players_array[i].score;
@@ -151,11 +156,11 @@ function Player(){
             }
             view.revealDealerCard();
             if(this.score >= highestScore){
-                console.log("DEALER WINS")
+                console.log("DEALER WINS");
                 console.log(highestScore)
             }
             else{
-                console.log("non busted people win!")
+                console.log("non busted people win!");
                 console.log(highestScore)
             }
         }
@@ -197,9 +202,15 @@ function BlackJack(){
         $(newPlayerDiv).css("border", "5px solid gold").removeClass("overlay");
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
         $('#player_number').text(this.playerTurn);
-        // self.players_array[this.playerTurn].calculator_score();
-        if(self.playerTurn === 0){
+
+        if(self.playerTurn ===0){
+            $('#player_number').text('Dealer'); 
+            $('.cpuText').addClass('dealerTurnText');
             this.players_array[0].dealerAI();
+        }else if(self.playerTurn >0){
+            $('#player_number').text(self.playerTurn);
+            $('.cpuText').removeClass('dealerTurnText');
+
         }
     };
    this.compare_score =  function(){
@@ -303,6 +314,7 @@ function handleStartClick(){
 }
 function reset(){
     clearCard();
+    $('.cpuText').removeClass('dealerTurnText');
     game.start_game();
 }
 function View(){
