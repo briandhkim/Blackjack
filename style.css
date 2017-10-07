@@ -124,5 +124,6 @@ body > .container-fluid{
 #messageList{
 	list-style: none;
 	font-size: 20px;
-	color:blue;
+	/*color:#4db6ac;*/
+	color:whitesmoke;
 }

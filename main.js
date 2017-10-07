@@ -48,6 +48,9 @@ function Player(){
     this.staying = false;
     this.get_card = function(){
         var cardDraw = game.deck.pop();
+        if(this.hand.length >= 2) {
+            messageHandler.logMessage(messageHandler.currentPlayerString() + "Hit me!");
+        }
         this.hand.push(cardDraw);
         this.calculator_score();
         view.createCardDom(cardDraw, this.ID)
@@ -57,14 +60,20 @@ function Player(){
     this.check_bust = function(){
         if(this.score>21){
             this.bust = true;
-            this.stay();
+            if(game.playerTurn !== 0){
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!")
+            }
+            else{
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
+            }
             console.log("player has busted");
+            this.stay();
         }
     };
     this.calculator_score = function(){
         this.score = 0;
         if(this.bust){
-            score = 0;
+            this.score = 0;
         }
         else{
             for(var i = 0; i<this.hand.length; i++){
@@ -88,15 +97,24 @@ function Player(){
     };
     this.stay = function(){
         this.staying = true;
-        game.playerTurn++;
+        if(this.score <= 21) {
+            if(this.ID === 0){
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
+            }
+            else{
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
+            }
+
+        }
+        game.changePlayerTurn();
     }
 }
 function BlackJack(){
     var self = this;
     this.payout = function(player){
         player.chips += (player.bet)*2;
-    }
-    this.deck;
+    };
+    this.deck = null;
     this.pool = 0;
     this.deck = null;
     this.deal_cards = function(){
@@ -105,7 +123,7 @@ function BlackJack(){
             this.players_array[i].get_card(this.deck);
         }
     };
-    this.playerTurn = 0;
+    this.playerTurn = 1;
     this.dealer = new Player();
     this.players_array = [];
     this.addplayers = function(number){
@@ -113,6 +131,14 @@ function BlackJack(){
             var player =  new Player();
             player.ID = i;
             this.players_array.push(player);
+        }
+    };
+    this.changePlayerTurn = function(){
+        if(this.playerTurn !== this.players_array.length-1){
+            this.playerTurn+=1;
+        }
+        else{
+            this.playerTurn = 0;
         }
     };
    this.compare_score =  function(){
@@ -129,6 +155,7 @@ function BlackJack(){
         self.deal_cards();
         console.log('players',this.players_array);
         console.log(this.deck);
+        messageHandler.logMessage("Game started.  Good luck!");
     }
 }
 function handleDrawClick(){
@@ -137,9 +164,8 @@ function handleDrawClick(){
     audioHandler.cardFlip();
 }
 function handleStayClick(){
-    console.log('handleStayClick works')
     var position = game.playerTurn;
-    game.players_array[position].stay;
+    game.players_array[position].stay();
 }
 function addClickHandlers(){
     $('#draw_card').click(handleDrawClick);
@@ -201,16 +227,18 @@ function MessageHandler(){
         }
         for(var i = 0; i < this.messages.length; i++){
             var messageLI = "#message_" + i;
-            console.log(messageLI)
             $(messageLI).text(this.messages[i]).css("list-style-type", "square")
         }
     };
-    this.convertCardToStringName = function(card){
-
+    this.currentPlayerString = function(){
+        var result = null;
+        if(parseInt(game.playerTurn) === 0){
+            result = "Dealer : "
+        }
+        else{
+            var playerTurn = parseInt(game.playerTurn);
+            result = "Player "+ playerTurn + ": "
+        }
+        return result
     }
 }
-
-
-// function GameController(){
-//     game.startGame();
-// }
