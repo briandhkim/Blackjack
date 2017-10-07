@@ -31,8 +31,9 @@ body > .container-fluid{
 	height: 50%;
 	font-family: 'Walter Turncoat', cursive;
 }
-#start_butt, #draw_card, #stay{
-	font-size: 1.2rem;
+#start_butt, #draw_card, #stay, #reset_butt{
+	font-size: 1.5rem;
+	font-family: 'Walter Turncoat', cursive;
 }
 .displayFiller{
 	margin-top: 5%;
@@ -52,7 +53,7 @@ body > .container-fluid{
 	/*border: 1px solid orange;*/
 }
 .currentPlayer{
-	height: 30%;
+	height: 40%;
 	font-family: 'Walter Turncoat', cursive;
 }
 /*end of css for button area css*/
@@ -103,13 +104,14 @@ body > .container-fluid{
 	justify-content: center;
 	align-items: center;
 }
-.player-label{
+.player-label, .dealer-label{
 	margin-left: 15px;
 	font-family: 'Permanent Marker', cursive;
 	text-shadow: 
 	1px 1px 0 #000,
 	-1px -1px 0 #000,
-	2px 2px 0 #000;
+	2px 2px 0 #000,
+	3px 3px 0 #000;
 }
 
 
@@ -126,4 +128,28 @@ body > .container-fluid{
 	font-size: 20px;
 	/*color:#4db6ac;*/
 	color:whitesmoke;
+}
+#modal{
+	left:50%;
+	top:50%;
+	height:50vh;
+	width:50vw;
+	z-index:2;
+	position:absolute;
+	transform:translate(-50%,-50%);
+	display:none;
+	font-size:3em;
+	color:red;
+	text-align: center;
+}
+#modal_overlay{
+	position:fixed;
+	top:0px;
+	left:0px;
+	height:100vh;
+	width:100vw;
+	background-color:black;
+	opacity: 0.7;
+	z-index:1;
+	display:none;
 }

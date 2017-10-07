@@ -32,26 +32,29 @@ function CreateDeck(){
         return this.deck;
     }
 }//end object
-
+function make_modals_disappear(){
+    $('#modal').css('display','none');
+    $('#modal_overlay').css('display','none');
+}
 function Player(){
     this.ID = null;
     this.chips = 500;
     this.bet =function(){
         this.bet = $('#get_bet').val()
-    }
+    };
     this.push_bet = function(bet){
         this.chips-bet;
-    }
+    };
     this.bust = false;
     this.hand = [];
     this.score = 0;
     this.staying = false;
     this.get_card = function(){
         var cardDraw = game.deck.pop();
-        if(this.hand.length >= 2) {
+        this.hand.push(cardDraw);
+        if(this.hand.length > 2 && this.score !== 21) {
             messageHandler.logMessage(messageHandler.currentPlayerString() + "Hit me!");
         }
-        this.hand.push(cardDraw);
         this.calculator_score();
         view.createCardDom(cardDraw, this.ID)
         console.log('hand',this.hand);
@@ -61,12 +64,15 @@ function Player(){
         if(this.score>21){
             this.bust = true;
             if(game.playerTurn !== 0){
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!")
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
+                console.log("player has busted");
+                $('#modal').css('display','block').text('busted');
+                $('#modal_overlay').css('display','block');
+                setTimeout(make_modals_disappear,1000);
             }
             else{
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
             }
-            console.log("player has busted");
             this.stay();
         }
     };
@@ -92,8 +98,13 @@ function Player(){
             if(this.score === 21){
                 this.stay();
             }
+            if(this.hand.length>2 && this.score !== 21){
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
+            }
+
             this.check_bust();
         }
+
     };
     this.stay = function(){
         this.staying = true;
@@ -156,6 +167,7 @@ function BlackJack(){
         console.log('players',this.players_array);
         console.log(this.deck);
         messageHandler.logMessage("Game started.  Good luck!");
+        $('#start_butt').addClass('disabled');
     }
 }
 function handleDrawClick(){
@@ -205,7 +217,7 @@ function View(){
             .css("margin", "10px")
             .addClass(className);
         $(divID).append(cardDiv);
-    }
+    };
     this.revealDealerCard = function(){
         var dealersFirstCard = game.players_array[0].hand[0];
         var cardImage = "images/" + dealersFirstCard.value + "_" + dealersFirstCard.suit + ".png";
