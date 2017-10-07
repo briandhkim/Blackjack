@@ -176,7 +176,7 @@ function handleDrawClick(){
     audioHandler.cardFlip();
 }
 function handleReset(){
-   reset()
+   reset();
 }
 function handleStayClick(){
     var position = game.playerTurn;
@@ -200,6 +200,7 @@ function handleStartClick(){
     game.start_game();
 }
 function reset(){
+    $('.hiddenCard').remove();
     $('.displayedCard').remove();
     game.start_game();
 }
