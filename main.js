@@ -2,6 +2,8 @@ $(document).ready(init);
 var new_deck = null;
 var anthony = null;
 var game =null;
+var visual = null;
+
 function CreateDeck(){
     this.deck=[];
     this.create_cards = function(){
@@ -60,13 +62,13 @@ function BlackJack(dealer){
         this.check_bust(player);
         this.playerTurn ++;
 
-   }
+   };
    this.check_bust = function(player){
        if(player.score>21){
            console.log("player loses");
            $('#draw_card').hide();
        }
-   }
+   };
    this.compare_score =  function(){
        if(this.player_stay){
 
@@ -86,7 +88,29 @@ function addClickHandlers(){
 function init(){
     game = new BlackJack();
     new_deck =  new CreateDeck();
+    visual = new Visual();
     game.start_game(new_deck);
     anthony = new Player();
     addClickHandlers();
+
+    //FOR TESTING
+    testCard = {};
+    testCard.value = 1;
+    testCard.suit = "Spades"
+    $(testCard).css("background-image", "images/")
+}
+
+function Visual(){
+    this.createCardDom = function(card, playerSpaceID){
+        var cardImage = "images/" + card.value + "_" + card.suit + ".png";
+        console.log('url(' + cardImage + ')');
+        var cardDiv = $("<div>")
+            .css("width", "50px")
+            .css("height", "70px")
+            .css("background-image", 'url(' + cardImage + ')')
+            .css("background-size", "100% 100%")
+            .css("background-repeat", "no-repeat")
+            .css("display", "inline-block");
+        $(playerSpaceID).append(cardDiv);
+    }
 }
