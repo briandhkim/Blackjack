@@ -2,6 +2,7 @@ html,body{
 	overflow-x:hidden;
 }
 /*font-family: 'Permanent Marker', cursive;*/
+/*font-family: 'Walter Turncoat', cursive;*/
 body > .container-fluid{
 	height: 100vh;
 }
@@ -17,15 +18,32 @@ body > .container-fluid{
 }
 .gameTitle{
 	height: 15%;
+	font-family: 'Permanent Marker', cursive;
+	text-shadow: 
+	1px 1px 0 #000,
+	-1px -1px 0 #000,
+	2px 2px 0 #000;
 }
 .gameStartInput{
 	height: 15%;
 }
-.gameStartInput > .row{
+.gameStartInput > .radioPlayerNumberLabel{
 	height: 50%;
+}
+#start_butt, #draw_card, #stay{
+	font-size: 1.2rem;
 }
 .displayFiller{
 	height: 30%;
+	font-family: 'Walter Turncoat', cursive;
+	font-size: 4rem;
+	text-shadow: 
+	1px 1px 0 #000,
+	-1px -1px 0 #000,
+	2px 2px 0 #000;
+}
+.displayFiller>img{
+	width:100%;
 }
 .playerTurnButtons{
 	height: 30%;
@@ -63,7 +81,8 @@ body > .container-fluid{
 }
 #displayMain{
 	height: 100%;
-	border: 5px solid brown;
+	border: 5px solid #3e2723;
+	border-style: double;
 	border-radius: 15%;
 	background-image: url('images/background.png');
 	background-position: center;
