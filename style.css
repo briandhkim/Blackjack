@@ -94,11 +94,14 @@ body > .container-fluid{
 	/*margin: 0 1px;*/
 	/*border: 1px solid;*/
 }
-#player_1, #player_2, #player_3, #player_4{
+#player_0, #player_1, #player_2, #player_3, #player_4{
 	height: 100%;
 	border: 1px dashed blue;
 	border-radius: 10px;
 	box-sizing: border-box;
+	display:flex;
+	justify-content: center;
+	align-items: center;
 }
 .player-label, .dealer-label{
 	margin-left: 15px;
