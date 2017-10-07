@@ -174,6 +174,7 @@ function BlackJack(){
             this.playerTurn = 0;
         }
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
+        $('#player_number').text(this.playerTurn);
         this.players_array[this.playerTurn].calculator_score();
     };
    this.compare_score =  function(){
@@ -186,6 +187,7 @@ function BlackJack(){
         self.dealer.hand = 0;
         self.dealer.score = 0;
         self.playerTurn = 1;
+        $('#player_number').text(self.playerTurn);
         var number_of_players = $('input[name=playerNum]:checked').val();
         self.addplayers(1 + parseInt(number_of_players));
         var new_deck =  new CreateDeck();
