@@ -1,6 +1,5 @@
 $(document).ready(init);
 var game =null;
-var anthony = null;
 var view = null;
 
 
@@ -36,10 +35,11 @@ function Player(){
     this.hand = [];
     this.score = 0;
     this.stay = false;
-    this.get_card = function(card){
-        this.hand.push(card);
-        console.log(this.hand);
+    this.get_card = function(deck){
+        this.hand.push(deck.pop());
+        console.log('hand',this.hand);
         this.calculator_score();
+        console.log('score',this.score)
     };
     this.calculator_score = function(){
         this.score = 0;
@@ -61,8 +61,9 @@ function BlackJack(){
     this.players_array = [];
     this.addplayers = function(number){
         for(var i = 0; i<number;i++){
-            var player_to_add = new Player();
-            this.players_array.push(player_to_add);
+            var player_to_add =  new Player();
+            var key =  "player" +i;
+            this.players_array.push({key:player_to_add});
         }
     };
     this.playerTurn = 0;
@@ -71,7 +72,6 @@ function BlackJack(){
    this.check_bust = function(player){
        if(player.score>21){
            console.log("player loses");
-           $('#draw_card').hide();
        }
 
    };
@@ -94,6 +94,8 @@ function BlackJack(){
     this.start_game = function(){
         this.dealer.hand = 0;
         this.dealer.score = 0;
+        this.addplayers(4);
+        console.log('players',this.players_array);
         var new_deck =  new CreateDeck();
         var deck = new_deck.make_deck();
         console.log(deck);
@@ -104,7 +106,7 @@ function handleDrawClick(){
 
 }
 function handleStayClick(){
-
+    player.get_card();
 }
 function addClickHandlers(){
     $('#draw_card').click(handleDrawClick);
@@ -112,12 +114,7 @@ function addClickHandlers(){
 }
 function init(){
     game = new BlackJack();
-
-    new_deck =  new CreateDeck();
     view = new View();
-    game.start_game(new_deck);
-    anthony = new Player();
-    addClickHandlers();
     game.start_game();
 }
 
