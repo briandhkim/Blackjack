@@ -66,13 +66,14 @@ function Player(){
             if(game.playerTurn !== 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
                 console.log("player has busted");
-                $('#modal').css('display','block').text('busted');
+                $('#modal').css('display','block').text('BUSTED!');
                 $('#modal_overlay').css('display','block');
                 setTimeout(make_modals_disappear,1000);
             }
             else{
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
-            }
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!")
+                view.revealDealerCard();
+           }
             this.stay();
         }
     };
@@ -98,7 +99,7 @@ function Player(){
             if(this.score === 21){
                 this.stay();
             }
-            if(this.hand.length>2 && this.score !== 21){
+            if(this.hand.length>2 && this.score !== 21 && this.ID !== 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
             }
 
@@ -111,6 +112,7 @@ function Player(){
         if(this.score <= 21) {
             if(this.ID === 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
+                view.revealDealerCard();
             }
             else{
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")

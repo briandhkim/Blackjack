@@ -125,7 +125,7 @@ body > .container-fluid{
 
 #messageList{
 	list-style: none;
-	font-size: 20px;
+	font-size: 19px;
 	/*color:#4db6ac;*/
 	color:whitesmoke;
 }
@@ -138,7 +138,7 @@ body > .container-fluid{
 	position:absolute;
 	transform:translate(-50%,-50%);
 	display:none;
-	font-size:3em;
+	font-size:10em;
 	color:red;
 	text-align: center;
 }
