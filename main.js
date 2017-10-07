@@ -44,9 +44,18 @@ function Player(){
     this.calculator_score = function(){
         this.score = 0;
         for(var i = 0; i<this.hand.length; i++){
-            this.score += this.hand[i].value;
+            if(this.hand[i].value>10){
+                this.score += 10;
+            }
+            else{
+                this.score += this.hand[i].value;
+            }
         }
-        console.log(this.score)
+        for(var i = 0; i<this.hand.length; i++){//convert Ace to 11 or 1
+            if(this.hand[i].value === 1 && this.score<=11){
+                this.score += 10;
+            }
+        }
     };
     this.stay = function(){
         this.staying  = true;
@@ -56,7 +65,7 @@ function BlackJack(){
     var self = this;
     this.deck;
     this.deal_cards = function(){
-        for(var i = 0; i<this.players_array;i++){
+        for(var i = 0; i<this.players_array.length;i++){
             this.players_array[i].get_card(this.deck);
             this.players_array[i].get_card(this.deck);
         }
@@ -95,16 +104,6 @@ function BlackJack(){
        }
 
    };
-   // this.compare_score =  function(player){
-   //     if(player.stay&&this.dealer.stay){
-   //          if(player.score>this.dealer.score){
-   //              console.log('player wins');
-   //          }
-   //          else{
-   //              console.log('player loses');
-   //          }
-   //     }
-   //  }//end compare sore
     this.start_game = function(){
         self.players_array = [];
         self.dealer.hand = 0;
@@ -133,7 +132,7 @@ function addClickHandlers(){
 function init(){
     game = new BlackJack();
     view = new View();
-    gameController = new GameController();
+    // gameController = new GameController();
     addClickHandlers();
 }
 function handleStartClick(){
@@ -161,6 +160,6 @@ function AudioHandler(){
     };
 }
 
-function GameController(){
-    game.startGame();
-}
+// function GameController(){
+//     game.startGame();
+// }
