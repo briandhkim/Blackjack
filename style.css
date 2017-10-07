@@ -31,8 +31,9 @@ body > .container-fluid{
 	height: 50%;
 	font-family: 'Walter Turncoat', cursive;
 }
-#start_butt, #draw_card, #stay{
-	font-size: 1.2rem;
+#start_butt, #draw_card, #stay, #reset_butt{
+	font-size: 1.5rem;
+	font-family: 'Walter Turncoat', cursive;
 }
 .displayFiller{
 	margin-top: 5%;
