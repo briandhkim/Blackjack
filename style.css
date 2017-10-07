@@ -1,6 +1,7 @@
 html,body{
 	overflow-x:hidden;
 }
+/*font-family: 'Permanent Marker', cursive;*/
 body > .container-fluid{
 	height: 100vh;
 }
@@ -11,6 +12,7 @@ body > .container-fluid{
 .buttonArea{
 	height: 90%;
 	margin-top: 2.5%;
+	margin-left: 2.08%;
 	border: 1px solid orange;
 }
 .gameTitle{
@@ -37,7 +39,8 @@ body > .container-fluid{
 .gameDisplayArea{
 	height: 95%;
 	margin-top: 1%;
-	border: 1px solid green;
+	margin-left: 3.1666%;
+	border-radius: 15px;
 	background-image: url("images/background.png");
 	background-size: 100% 100%;
 }
@@ -51,7 +54,8 @@ body > .container-fluid{
 	border: 1px solid blue;
 }
 .displayMiddle{
-	height: 37.5%;
+	height: 37%;
+	margin-top: 0.25%;
 }
 #displayMain{
 	height: 100%;
@@ -63,13 +67,23 @@ body > .container-fluid{
 	opacity: 0.85;
 }
 .playersArea{
-	height: 37.5%;
+	height: 37%;
 	/*margin: 0 1px;*/
 	/*border: 1px solid;*/
 }
 #player_1, #player_2, #player_3, #player_4{
 	height: 100%;
 	border: 1px solid blue;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
+.player-label{
+	margin-left: 15px;
+	font-family: 'Permanent Marker', cursive;
+	text-shadow: 
+	1px 1px 0 #000,
+	-1px -1px 0 #000,
+	2px 2px 0 #000;
 }
 
 
