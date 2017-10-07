@@ -46,8 +46,8 @@ function Player(){
     this.hand = [];
     this.score = 0;
     this.staying = false;
-    this.get_card = function(deck){
-        var cardDraw = deck.pop();
+    this.get_card = function(){
+        var cardDraw = game.deck.pop();
         this.hand.push(cardDraw);
         this.calculator_score();
         view.createCardDom(cardDraw, this.ID)
@@ -57,6 +57,7 @@ function Player(){
     this.check_bust = function(){
         if(this.score>21){
             this.bust = true;
+            this.stay();
             console.log("player has busted");
         }
     };
@@ -86,8 +87,8 @@ function Player(){
         }
     };
     this.stay = function(){
-        this.staying  = true;
-        game.playerTurn ++;
+        this.staying = true;
+        game.playerTurn++;
     }
 }
 function BlackJack(){
@@ -135,6 +136,7 @@ function handleDrawClick(){
     game.players_array[position].get_card();
 }
 function handleStayClick(){
+    console.log('handleStayClick works')
     var position = game.playerTurn;
     game.players_array[position].stay;
 }
