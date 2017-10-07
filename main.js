@@ -46,17 +46,32 @@ function Player(){
     this.calculator_score = function(){
         this.score = 0;
         for(var i = 0; i<this.hand.length; i++){
-            this.score += this.hand[i].value;
+            if(this.hand[i].value>10){
+                this.score += 10;
+            }
+            else{
+                this.score += this.hand[i].value;
+            }
         }
-        console.log(this.score)
+        for(var i = 0; i<this.hand.length; i++){//convert Ace to 11 or 1
+            if(this.hand[i].value === 1 && this.score<=11){
+                this.score += 10;
+            }
+        }
     };
     this.stay = function(){
         this.staying  = true;
     }
 }
-
 function BlackJack(){
+    var self = this;
     this.deck;
+    this.deal_cards = function(){
+        for(var i = 0; i<this.players_array.length;i++){
+            this.players_array[i].get_card(this.deck);
+            this.players_array[i].get_card(this.deck);
+        }
+    };
     this.playerTurn = 0;
     this.dealer = new Player();
     this.players_array = [];
@@ -91,25 +106,16 @@ function BlackJack(){
        }
 
    };
-   // this.compare_score =  function(player){
-   //     if(player.stay&&this.dealer.stay){
-   //          if(player.score>this.dealer.score){
-   //              console.log('player wins');
-   //          }
-   //          else{
-   //              console.log('player loses');
-   //          }
-   //     }
-   //  }//end compare sore
     this.start_game = function(){
-        this.players_array = [];
-        this.dealer.hand = 0;
-        this.dealer.score = 0;
+        self.players_array = [];
+        self.dealer.hand = 0;
+        self.dealer.score = 0;
         var number_of_players = $('input[name=playerNum]:checked').val();
-        this.addplayers(number_of_players);
-        console.log('players',this.players_array);
+        self.addplayers(number_of_players);
         var new_deck =  new CreateDeck();
-        this.deck = new_deck.make_deck();
+        self.deck = new_deck.make_deck();
+        self.deal_cards();
+        console.log('players',this.players_array);
         console.log(this.deck);
     }
 }
@@ -171,9 +177,6 @@ function MessageHandler(){
         }
     }
 }
-
-
-
 
 
 // function GameController(){
