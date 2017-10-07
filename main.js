@@ -93,11 +93,6 @@ function init(){
     anthony = new Player();
     addClickHandlers();
 
-    //FOR TESTING
-    testCard = {};
-    testCard.value = 1;
-    testCard.suit = "Spades"
-    $(testCard).css("background-image", "images/")
 }
 
 function View(){
