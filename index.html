@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
@@ -20,7 +21,7 @@
                 </div>
                 <div class="row gameStartInput text-center">
                     <div class="row radioPlayerNumberLabel">
-                        Number of players
+                        <h3 class="h3-responsive">Number of players</h3>
                     </div>
                     <div class="row radioPlayerNumberInput">
                         <input type="radio" name="playerNum" id="1-player" value="1" checked>
@@ -38,24 +39,48 @@
                 </div>
                 <div class="row displayFiller"></div>
                 <div class="row playerTurnButtons text-center">
+                    <div class="currentPlayer">
+                        <h2 class="h2-responsive">
+                            <!-- use span below to update current player when player turn is changed -->
+                            <span class="currentPlayerUpdate">Player --'s turn : </span>
+                        </h2>
+                    </div>
                     <button class="btn btn-default btn-lg" id="draw_card">Hit</button>
                     <button class="btn btn-secondary btn-lg" id="stay">Stay</button>
                 </div>          
             </div> <!--end of buttonanddisplay div-->
 
-            <div class="col-sm-10 gameDisplayArea"> <!--main game display-->
+            <div class="col-sm-9 gameDisplayArea"> <!--main game display-->
                 <div class="row dealerArea">
                     <div class="col-xs-12 col-sm-6 col-sm-offset-3 dealerDisplay"></div>
                 </div>
-                <div class="row displayMiddle">
-                    <div class="col-sm-4" id="player_1"></div>
-                    <div class="col-sm-4" id="displayMain"></div>
-                    <div class="col-sm-4" id="player_4"></div>
+                <div class="row displayMiddle view">
+                    <div class="col-sm-4 view overlay hm-white-light" id="player_1">
+                        <div class="mask">
+                            <h4 class="h4-responsive white-text player-label">Player 1 :</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" id="displayMain">
+                        
+                    </div>
+                    <div class="col-sm-4 view overlay hm-white-light" id="player_4">
+                        <div class="mask">
+                            <h4 class="h4-responsive white-text player-label">Player 4 :</h4>
+                        </div>
+                    </div>
                 </div>
-                <div class="row playersArea">
+                <div class="row playersArea view">
                     <!-- <div class="col-xs-6 col-sm-3" id="player_1"></div> -->
-                    <div class="col-xs-6 col-sm-4 col-sm-offset-2" id="player_2"></div>
-                    <div class="col-xs-6 col-sm-4" id="player_3"></div>
+                    <div class="col-sm-4 col-sm-offset-2 view overlay hm-white-light" id="player_2">
+                        <div class="mask">
+                            <h4 class="h4-responsive white-text player-label">Player 2 :</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 view overlay hm-white-light" id="player_3">
+                        <div class="mask">
+                            <h4 class="h4-responsive white-text player-label">Player 3 :</h4>
+                        </div>
+                    </div>
                     <!-- <div class="col-xs-6 col-sm-3" id="player_4"></div> -->
                 </div>
             </div>  <!--end of gameDisplayArea div-->
