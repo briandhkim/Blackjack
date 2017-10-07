@@ -8,7 +8,7 @@ body > .container-fluid{
 }
 .buttonAndDisplay{
 	height: 83%;
-	border: 1px solid;
+	/*border: 1px solid;*/
 }
 .buttonArea{
 	height: 90%;
@@ -25,15 +25,17 @@ body > .container-fluid{
 	2px 2px 0 #000;
 }
 .gameStartInput{
-	height: 15%;
+	/*height: 15%;*/
 }
 .gameStartInput > .radioPlayerNumberLabel{
 	height: 50%;
+	font-family: 'Walter Turncoat', cursive;
 }
 #start_butt, #draw_card, #stay{
 	font-size: 1.2rem;
 }
 .displayFiller{
+	margin-top: 5%;
 	height: 30%;
 	font-family: 'Walter Turncoat', cursive;
 	font-size: 4rem;
@@ -51,6 +53,7 @@ body > .container-fluid{
 }
 .currentPlayer{
 	height: 30%;
+	font-family: 'Walter Turncoat', cursive;
 }
 /*end of css for button area css*/
 
@@ -58,7 +61,7 @@ body > .container-fluid{
 	height: 95%;
 	margin-top: 1%;
 
-	border: 1px solid green;
+	border: 5px solid #3e2723;
 
 	margin-left: 3.1666%;
 	border-radius: 15px;
@@ -111,8 +114,11 @@ body > .container-fluid{
 
 
 .statusDisplay{
-	height: 17%;
-	border: 1px solid;
+	height: 15%;
+	border: 6px solid black;
+	border-style: double;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 #messageList{
