@@ -57,10 +57,12 @@ function Player(){
         if(this.hand.length > 2 && this.score !== 21) {
             messageHandler.logMessage(messageHandler.currentPlayerString() + "Hit me!");
         }
-        this.calculator_score();
-        view.createCardDom(cardDraw, this.ID)
+        if(this.hand.length > 2) {
+            this.calculator_score();
+            console.log('score',this.score)
+        }
+        view.createCardDom(cardDraw, this.ID);
         console.log('hand',this.hand);
-        console.log('score',this.score)
     };
     // var recorderVid = $('<iframe>',{
     //     class:'embed-responsive-item',
@@ -172,6 +174,7 @@ function BlackJack(){
             this.playerTurn = 0;
         }
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
+        this.players_array[this.playerTurn].calculator_score();
     };
    this.compare_score =  function(){
 
@@ -193,6 +196,7 @@ function BlackJack(){
         messageHandler.logMessage("Game started.  Good luck!");
         $('#start_butt').addClass('disabled');
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
+        this.players_array[this.playerTurn].calculator_score();
     }
 }
 function handleDrawClick(){
