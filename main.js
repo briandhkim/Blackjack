@@ -32,7 +32,10 @@ function CreateDeck(){
         return this.deck;
     }
 }//end object
-
+function make_modals_disappear(){
+    $('#modal').css('display','none');
+    $('#modal_overlay').css('display','none');
+}
 function Player(){
     this.ID = null;
     this.chips = 500;
@@ -58,6 +61,9 @@ function Player(){
         if(this.score>21){
             this.bust = true;
             this.stay();
+            $('#modal').css('display','block').text('busted');
+            $('#modal_overlay').css('display','block');
+            setTimeout(make_modals_disappear,2000);
             console.log("player has busted");
         }
     };
