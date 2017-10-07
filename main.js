@@ -140,6 +140,7 @@ function BlackJack(){
 function handleDrawClick(){
     var position = game.playerTurn;
     game.players_array[position].get_card();
+    audioHandler.cardFlip();
 }
 function handleStayClick(){
     console.log('handleStayClick works')
@@ -164,20 +165,31 @@ function handleStartClick(){
 }
 function View(){
     this.createCardDom = function(card, playerSpaceID){
-        console.log("CREATE CARD DOM");
-        var cardImage = "images/" + card.value + "_" + card.suit + ".png";
-        console.log("cardImage = " + cardImage);
+        var cardImage = null;
+        var className = "displayedCard";
+        if(playerSpaceID === 0 && game.players_array[0].hand.length === 1){
+            cardImage = "images/cardBack.png";
+            className = "hiddenCard"
+        }
+        else {
+            cardImage = "images/" + card.value + "_" + card.suit + ".png";
+        }
         var divID = "#player_" + (playerSpaceID);
-        console.log(divID);
         var cardDiv = $("<div>")
-            .css("width", "100px")
-            .css("height", "140px")
+            .css("width", "75px")
+            .css("height", "105px")
             .css("background-image", 'url(' + cardImage + ')')
             .css("background-size", "100% 100%")
             .css("background-repeat", "no-repeat")
             .css("display", "inline-block")
-            .css("margin", "10px");
+            .css("margin", "10px")
+            .addClass(className);
         $(divID).append(cardDiv);
+    }
+    this.revealDealerCard = function(){
+        var dealersFirstCard = game.players_array[0].hand[0];
+        var cardImage = "images/" + dealersFirstCard.value + "_" + dealersFirstCard.suit + ".png";
+        $(".hiddenCard").css("background-image", 'url(' + cardImage + ')')
     }
 }
 function AudioHandler(){

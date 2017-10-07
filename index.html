@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="dealerPick.js"></script>
     <script src="main.js"></script>
     <title>our lord harry</title>
 </head>
@@ -37,6 +38,7 @@
                 </div> 
                 <div class="row startButtonArea text-center">
                     <button class="btn btn-success btn-lg" id="start_butt">START</button>
+                    <button class="btn btn-amber btn-lg" id="reset_butt">RESET</button>
                 </div>
                 <div class="row displayFiller text-center view overlay hm-zoom">
                     <img src="images/badass.jpg" class="img-fluid" alt="it's a gob">
@@ -60,12 +62,18 @@
             </div> <!--end of buttonanddisplay div-->
 
             <div class="col-sm-9 gameDisplayArea green darken-2"> <!--main game display-->
-                <div class="row dealerArea">
-                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 dealerDisplay" id="player_0"></div>
+                <div class="row dealerArea view">
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 dealerDisplay overlay hm-red-light" id="player_0">
+                        <div class="mask pattern-1">
+                            <h4 class="h4-responsive white-text dealer-label">Today's dealer : 
+                                <span id="ourDealer"></span>
+                            </h4>
+                        </div>  
+                    </div>
                 </div>
                 <div class="row displayMiddle view">
                     <div class="col-sm-4 view overlay hm-white-light" id="player_1">
-                        <div class="mask">
+                        <div class="mask pattern-1">
                             <h4 class="h4-responsive white-text player-label">Player 1 :</h4>
                         </div>
                     </div>
@@ -73,7 +81,7 @@
                         
                     </div>
                     <div class="col-sm-4 view overlay hm-white-light" id="player_4">
-                        <div class="mask">
+                        <div class="mask pattern-1">
                             <h4 class="h4-responsive white-text player-label">Player 4 :</h4>
                         </div>
                     </div>
@@ -81,12 +89,12 @@
                 <div class="row playersArea view">
                     <!-- <div class="col-xs-6 col-sm-3" id="player_1"></div> -->
                     <div class="col-sm-4 col-sm-offset-2 view overlay hm-white-light" id="player_2">
-                        <div class="mask">
+                        <div class="mask pattern-1">
                             <h4 class="h4-responsive white-text player-label">Player 2 :</h4>
                         </div>
                     </div>
                     <div class="col-sm-4 view overlay hm-white-light" id="player_3">
-                        <div class="mask">
+                        <div class="mask pattern-1">
                             <h4 class="h4-responsive white-text player-label">Player 3 :</h4>
                         </div>
                     </div>

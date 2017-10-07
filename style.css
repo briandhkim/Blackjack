@@ -31,8 +31,9 @@ body > .container-fluid{
 	height: 50%;
 	font-family: 'Walter Turncoat', cursive;
 }
-#start_butt, #draw_card, #stay{
-	font-size: 1.2rem;
+#start_butt, #draw_card, #stay, #reset_butt{
+	font-size: 1.5rem;
+	font-family: 'Walter Turncoat', cursive;
 }
 .displayFiller{
 	margin-top: 5%;
@@ -94,19 +95,23 @@ body > .container-fluid{
 	/*margin: 0 1px;*/
 	/*border: 1px solid;*/
 }
-#player_1, #player_2, #player_3, #player_4{
+#player_0, #player_1, #player_2, #player_3, #player_4{
 	height: 100%;
 	border: 1px dashed blue;
 	border-radius: 10px;
 	box-sizing: border-box;
+	display:flex;
+	justify-content: center;
+	align-items: center;
 }
-.player-label{
+.player-label, .dealer-label{
 	margin-left: 15px;
 	font-family: 'Permanent Marker', cursive;
 	text-shadow: 
 	1px 1px 0 #000,
 	-1px -1px 0 #000,
-	2px 2px 0 #000;
+	2px 2px 0 #000,
+	3px 3px 0 #000;
 }
 
 
