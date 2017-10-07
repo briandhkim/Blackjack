@@ -1,15 +1,13 @@
 $(document).ready(init);
-var new_deck = null;
-var anthony = null;
 var game =null;
-var player = null;
+
 function CreateDeck(){
     this.deck=[];
     this.create_cards = function(){
         var suits = ['Spades', 'Hearts', 'Diamonds','Clubs'];
         for(var j = 0; j<suits.length; j++){
             for(var i = 1; i<14; i++){
-                var card = {}
+                var card = {};
                 card.suit = suits[j];
                 card.value = i;
                 this.deck.push(card);
@@ -17,7 +15,7 @@ function CreateDeck(){
         }//end outer for
     }//end create deck
     this.shuffleDeck = function(){
-        var shuffledDeck = []
+        var shuffledDeck = [];
         while(this.deck.length>0){
             var random_pick = Math.floor(Math.random()*this.deck.length);
             shuffledDeck.push(this.deck.splice(random_pick,1)[0]);
@@ -39,18 +37,19 @@ function Player(){
         this.hand.push(card);
         console.log(this.hand);
         this.calculator_score();
-    }
+    };
     this.calculator_score = function(){
         this.score = 0;
         for(var i = 0; i<this.hand.length; i++){
             this.score += this.hand[i].value;
         }
         console.log(this.score)
-    }
+    };
     this.stay = function(){
         this.staying  = true;
     }
 }
+
 
 function BlackJack(){
     this.players_array = []
@@ -62,14 +61,6 @@ function BlackJack(){
     }
     this.playerTurn = 0;
     this.dealer = new Player();
-   this.draw_card = function(player,game){
-        var card  = game.deck.pop();
-        player.get_card(card);
-        this.check_bust(player);
-        // this.compare_score()
-        this.playerTurn ++;
-
-   }
    this.check_bust = function(player){
        if(player.score>21){
            console.log("player loses");
@@ -89,21 +80,17 @@ function BlackJack(){
     this.start_game = function(){
         this.dealer.hand = 0;
         this.dealer.score = 0;
-        new_deck =  new CreateDeck();
+        var new_deck =  new CreateDeck();
         var deck = new_deck.make_deck();
         console.log(deck);
-        game = new BlackJack();
-        new_deck =  new CreateDeck();
-        game.start_game(new_deck);
-        this
         addClickHandlers();
     }
 }
 function handleDrawClick(){
-    game.draw_card(anthony,new_deck)
+
 }
-function handleStayClick(player,player_array){
-    anthony.stay = true;
+function handleStayClick(){
+
 }
 function addClickHandlers(){
     $('#draw_card').click(handleDrawClick);
@@ -111,8 +98,5 @@ function addClickHandlers(){
 }
 function init(){
     game = new BlackJack();
-    new_deck =  new CreateDeck();
-    game.start_game(new_deck);
-    anthony = new Player();
-    addClickHandlers();
+    game.start_game();
 }
