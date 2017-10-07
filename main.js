@@ -34,8 +34,10 @@ function CreateDeck(){
 }//end object
 function make_modals_disappear(){
     $('#modal').css('display','none');
+    // $('#recorderMeme').remove();
     $('#modal_overlay').css('display','none');
 }
+
 function Player(){
     this.ID = null;
     this.chips = 500;
@@ -60,13 +62,22 @@ function Player(){
         console.log('hand',this.hand);
         console.log('score',this.score)
     };
+    // var recorderVid = $('<iframe>',{
+    //     class:'embed-responsive-item',
+    //     src : 'https://www.youtube.com/embed/X2WH8mHJnhM?start=17?autoplay=1'
+    // });
+    // var recorderMeme = $('<div>',{
+    //     class:"embed-responsive embed-responsive-4by3",
+    //     id: 'recorderMeme'
+    // }).append(recorderVid);
     this.check_bust = function(){
         if(this.score>21){
             this.bust = true;
             if(game.playerTurn !== 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
                 console.log("player has busted");
-                $('#modal').css('display','block').text('BUSTED!').css("color", "red");
+                $('#modal').css('display','block').text('BUSTED!').css("color", "red").append(recorderMeme);
+
                 $('#modal_overlay').css('display','block');
                 setTimeout(make_modals_disappear,1000);
             }
