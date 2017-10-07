@@ -28,7 +28,7 @@ function CreateDeck(){
 function Player(){
     this.hand = [];
     this.score = 0;
-    this.staying = false;
+    this.stay = false;
     this.get_card = function(card){
         this.hand.push(card);
         console.log(this.hand);
@@ -46,9 +46,9 @@ function Player(){
     }
 }
 
-function BlackJack(){
-    // this.playerTurn = 0;
-    // this.dealer = dealer;
+function BlackJack(dealer){
+    this.playerTurn = 0;
+    this.dealer = dealer;
     this.start_game = function(deck){
         deck.create_cards();
         deck.shuffleDeck();
@@ -57,14 +57,31 @@ function BlackJack(){
    this.draw_card = function(player,game){
         var card  = game.deck.pop();
         player.get_card(card);
+        this.check_bust(player);
+        this.playerTurn ++;
+
    }
+   this.check_bust = function(player){
+       if(player.score>21){
+           console.log("player loses");
+           $('#draw_card').hide();
+       }
+   }
+   this.compare_score =  function(){
+       if(this.player_stay){
+
+       }
+    }
 }
 function handleDrawClick(){
     game.draw_card(anthony,new_deck)
 }
-
+function handleStayClick(){
+    anthony.stay = true;
+}
 function addClickHandlers(){
     $('#draw_card').click(handleDrawClick);
+    $('#stay').click(handleStayClick);
 }
 function init(){
     game = new BlackJack();
