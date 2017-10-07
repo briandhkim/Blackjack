@@ -14,7 +14,7 @@ body > .container-fluid{
 	height: 90%;
 	margin-top: 2.5%;
 	margin-left: 2.08%;
-	border: 1px solid orange;
+	/*border: 1px solid orange;*/
 }
 .gameTitle{
 	height: 15%;
@@ -49,7 +49,7 @@ body > .container-fluid{
 }
 .playerTurnButtons{
 	height: 30%;
-	border: 1px solid orange;
+	/*border: 1px solid orange;*/
 }
 .currentPlayer{
 	height: 30%;
@@ -60,14 +60,11 @@ body > .container-fluid{
 .gameDisplayArea{
 	height: 95%;
 	margin-top: 1%;
-
 	border: 5px solid #3e2723;
-
 	margin-left: 3.1666%;
 	border-radius: 15px;
 	/*background-image: url("images/background.png");*/
 	/*background-size: 100% 100%;*/
-
 }
 .dealerArea{
 	height: 25%;
@@ -76,7 +73,7 @@ body > .container-fluid{
 }
 .dealerDisplay{
 	height: 100%;
-	border: 1px solid blue;
+	border: 2px dashed red;
 }
 .displayMiddle{
 	height: 37%;
@@ -99,7 +96,7 @@ body > .container-fluid{
 }
 #player_0, #player_1, #player_2, #player_3, #player_4{
 	height: 100%;
-	border: 1px solid blue;
+	border: 1px dashed blue;
 	border-radius: 10px;
 	box-sizing: border-box;
 	display:flex;

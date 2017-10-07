@@ -36,16 +36,18 @@ function CreateDeck(){
 function Player(){
     this.ID = null;
     this.chips = 500;
-    this.bet =function(num){
-        this.chips - num;
-        game.pool += num;
-    };
+    this.bet =function(){
+        this.bet = $('#get_bet').val()
+    }
+    this.push_bet = function(bet){
+        this.chips-bet;
+    }
     this.bust = false;
     this.hand = [];
     this.score = 0;
     this.staying = false;
-    this.get_card = function(deck){
-        var cardDraw = deck.pop();
+    this.get_card = function(){
+        var cardDraw = game.deck.pop();
         this.hand.push(cardDraw);
         this.calculator_score();
         view.createCardDom(cardDraw, this.ID)
@@ -55,6 +57,7 @@ function Player(){
     this.check_bust = function(){
         if(this.score>21){
             this.bust = true;
+            this.stay();
             console.log("player has busted");
         }
     };
@@ -84,16 +87,17 @@ function Player(){
         }
     };
     this.stay = function(){
-        this.staying  = true;
-        game.playerTurn ++;
+        this.staying = true;
+        game.playerTurn++;
     }
 }
 function BlackJack(){
     var self = this;
+    this.payout = function(player){
+        player.chips += (player.bet)*2;
+    }
+    this.deck;
     this.pool = 0;
-    this.payout = function(payout){
-        game.players_array[this.playerTurn].chips += payout;
-    };
     this.deck = null;
     this.deal_cards = function(){
         for(var i = 0; i<this.players_array.length;i++){
@@ -133,6 +137,7 @@ function handleDrawClick(){
     audioHandler.cardFlip();
 }
 function handleStayClick(){
+    console.log('handleStayClick works')
     var position = game.playerTurn;
     game.players_array[position].stay;
 }
@@ -181,14 +186,12 @@ function View(){
         $(".hiddenCard").css("background-image", 'url(' + cardImage + ')')
     }
 }
-
 function AudioHandler(){
     this.cardFlip = function(){
         var audio = new Audio("audio/flip.wav");
         audio.play();
     };
 }
-
 function MessageHandler(){
     this.messages = [];
     this.logMessage = function(message){
