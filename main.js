@@ -1,6 +1,8 @@
 $(document).ready(init);
 var game =null;
 var view = null;
+var gameController = null;
+
 function CreateDeck(){
     this.deck=[];
     this.create_cards = function(){
@@ -51,13 +53,6 @@ function Player(){
     }
 }
 
-
-
-
-
-
-
-
 function BlackJack(){
     this.deck;
     this.playerTurn = 0;
@@ -69,9 +64,18 @@ function BlackJack(){
             this.players_array.push(player);
         }
     };
+    this.nextPlayerTurn = function(){
+        if(this.playerTurn !== this.players_array.length-1){
+            this.playerTurn += 1;
+        }
+        else{
+            this.playerTurn = 0;
+        }
+    };
+
     this.draw = function(){
         this.players_array[this.playerTurn].get_card(this.deck);
-    }
+    };
 
    this.check_bust = function(player){
        if(player.score>21){
@@ -122,6 +126,7 @@ function addClickHandlers(){
 function init(){
     game = new BlackJack();
     view = new View();
+    gameController = new GameController();
     addClickHandlers();
 }
 function handleStartClick(){
@@ -147,4 +152,8 @@ function AudioHandler(){
         var audio = new Audio("audio/flip.wav");
         audio.play();
     };
+}
+
+function GameController(){
+    game.startGame();
 }
