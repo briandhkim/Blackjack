@@ -1,7 +1,9 @@
 $(document).ready(init);
 var game =null;
 var view = null;
-var gameController = null;
+var messageHandler = null;
+var audioHandler = null;
+// var gameController = null;
 
 function CreateDeck(){
     this.deck=[];
@@ -126,7 +128,9 @@ function addClickHandlers(){
 function init(){
     game = new BlackJack();
     view = new View();
-    gameController = new GameController();
+    audioHandler = new AudioHandler();
+    messageHandler = new MessageHandler();
+    // gameController = new GameController();
     addClickHandlers();
 }
 function handleStartClick(){
@@ -135,7 +139,6 @@ function handleStartClick(){
 function View(){
     this.createCardDom = function(card, playerSpaceID){
         var cardImage = "images/" + card.value + "_" + card.suit + ".png";
-        console.log('url(' + cardImage + ')');
         var cardDiv = $("<div>")
             .css("width", "50px")
             .css("height", "70px")
@@ -154,6 +157,25 @@ function AudioHandler(){
     };
 }
 
-function GameController(){
-    game.startGame();
+function MessageHandler(){
+    this.messages = [];
+    this.logMessage = function(message){
+        this.messages.unshift(message)
+        if(this.messages.length > 5){
+            this.messages.pop();
+        }
+        for(var i = 0; i < this.messages.length; i++){
+            var messageLI = "#message_" + i;
+            console.log(messageLI)
+            $(messageLI).text(this.messages[i]).css("list-style-type", "square")
+        }
+    }
 }
+
+
+
+
+
+// function GameController(){
+//     game.startGame();
+// }

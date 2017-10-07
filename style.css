@@ -38,8 +38,6 @@ body > .container-fluid{
 	height: 95%;
 	margin-top: 1%;
 	border: 1px solid green;
-	background-image: url("images/background.png");
-	background-size: 100% 100%;
 }
 .dealerArea{
 	height: 25%;
@@ -76,4 +74,10 @@ body > .container-fluid{
 .statusDisplay{
 	height: 17%;
 	border: 1px solid;
+}
+
+#messageList{
+	list-style: none;
+	font-size: 20px;
+	color:blue;
 }
