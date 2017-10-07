@@ -174,9 +174,15 @@ function BlackJack(){
         }
         var newPlayerDiv = "#player_" + (this.playerTurn);
         $(newPlayerDiv).css("border", "5px solid gold").removeClass("overlay");
-        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
-        $('#player_number').text(this.playerTurn);
+        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.");
         self.players_array[this.playerTurn].calculator_score();
+        if(self.playerTurn ==0){
+            $('#player_number').text('Dealer'); 
+            $('.cpuText').addClass('dealerTurnText');
+        }else if(self.playerTurn >0){
+            $('#player_number').text(self.playerTurn);
+            $('.cpuText').removeClass('dealerTurnText');
+        }  
     };
    this.compare_score =  function(){
        var dealer_win = true;
@@ -279,6 +285,7 @@ function handleStartClick(){
 }
 function reset(){
     clearCard();
+    $('.cpuText').removeClass('dealerTurnText');
     game.start_game();
 }
 function View(){
