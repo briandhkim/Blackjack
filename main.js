@@ -167,15 +167,20 @@ function BlackJack(){
         }
     };
     this.changePlayerTurn = function(){
+        var oldPlayerDiv = "#player_" + (this.playerTurn);
+        $(oldPlayerDiv).css("border", "1px dashed blue").addClass("overlay");
         if(this.playerTurn !== this.players_array.length-1){
             this.playerTurn+=1;
         }
         else{
             this.playerTurn = 0;
         }
+        var newPlayerDiv = "#player_" + (this.playerTurn);
+        $(newPlayerDiv).css("border", "5px solid gold").removeClass("overlay");
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
         $('#player_number').text(this.playerTurn);
         this.players_array[this.playerTurn].calculator_score();
+
     };
    this.compare_score =  function(){
 
@@ -197,7 +202,8 @@ function BlackJack(){
         console.log(this.deck);
         messageHandler.logMessage("Game started.  Good luck!");
         $('#start_butt').addClass('disabled');
-        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
+        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.");
+        $("#player_" + (this.playerTurn)).css("border", "5px solid gold").removeClass("overlay");
         this.players_array[this.playerTurn].calculator_score();
     }
 }
