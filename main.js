@@ -34,18 +34,21 @@ function CreateDeck(){
 }//end object
 
 function Player(){
+    this.ID = null;
     this.chips = 500;
     this.bet =function(num){
         this.chips - num;
         game.pool += num;
-    }
+    };
     this.bust = false;
     this.hand = [];
     this.score = 0;
     this.staying = false;
     this.get_card = function(deck){
-        this.hand.push(deck.pop());
+        var cardDraw = deck.pop();
+        this.hand.push(cardDraw);
         this.calculator_score();
+        view.createCardDom(cardDraw, this.ID)
         console.log('hand',this.hand);
         console.log('score',this.score)
     };
@@ -90,8 +93,8 @@ function BlackJack(){
     this.pool = 0;
     this.payout = function(payout){
         game.players_array[this.playerTurn].chips += payout;
-    }
-    this.deck;
+    };
+    this.deck = null;
     this.deal_cards = function(){
         for(var i = 0; i<this.players_array.length;i++){
             this.players_array[i].get_card(this.deck);
@@ -104,6 +107,7 @@ function BlackJack(){
     this.addplayers = function(number){
         for(var i = 0; i<number;i++){
             var player =  new Player();
+            player.ID = i;
             this.players_array.push(player);
         }
     };
@@ -115,7 +119,7 @@ function BlackJack(){
         self.dealer.hand = 0;
         self.dealer.score = 0;
         var number_of_players = $('input[name=playerNum]:checked').val();
-        self.addplayers(number_of_players);
+        self.addplayers(1 + parseInt(number_of_players));
         var new_deck =  new CreateDeck();
         self.deck = new_deck.make_deck();
         self.deal_cards();
@@ -149,15 +153,20 @@ function handleStartClick(){
 }
 function View(){
     this.createCardDom = function(card, playerSpaceID){
+        console.log("CREATE CARD DOM");
         var cardImage = "images/" + card.value + "_" + card.suit + ".png";
+        console.log("cardImage = " + cardImage);
+        var divID = "#player_" + (playerSpaceID);
+        console.log(divID);
         var cardDiv = $("<div>")
-            .css("width", "50px")
-            .css("height", "70px")
+            .css("width", "100px")
+            .css("height", "140px")
             .css("background-image", 'url(' + cardImage + ')')
             .css("background-size", "100% 100%")
             .css("background-repeat", "no-repeat")
-            .css("display", "inline-block");
-        $(playerSpaceID).append(cardDiv);
+            .css("display", "inline-block")
+            .css("margin", "10px");
+        $(divID).append(cardDiv);
     }
 }
 
@@ -180,6 +189,9 @@ function MessageHandler(){
             console.log(messageLI)
             $(messageLI).text(this.messages[i]).css("list-style-type", "square")
         }
+    };
+    this.convertCardToStringName = function(card){
+
     }
 }
 
