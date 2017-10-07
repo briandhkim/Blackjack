@@ -1,8 +1,6 @@
 $(document).ready(init);
 var game =null;
 var view = null;
-
-
 function CreateDeck(){
     this.deck=[];
     this.create_cards = function(){
@@ -57,6 +55,9 @@ function Player(){
 
 
 
+
+
+
 function BlackJack(){
     this.players_array = [];
     this.addplayers = function(number){
@@ -106,7 +107,7 @@ function handleDrawClick(){
 
 }
 function handleStayClick(){
-    player.get_card();
+    game.players_array[].get_card();
 }
 function addClickHandlers(){
     $('#draw_card').click(handleDrawClick);
