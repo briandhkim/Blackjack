@@ -44,8 +44,8 @@ function Player(){
         this.calculator_score();
         console.log('score',this.score)
     };
-    this.check_bust = function(player){
-        if(player.score>21){
+    this.check_bust = function(){
+        if(this.score>21){
             this.bust = true;
             console.log("player has busted");
         }
