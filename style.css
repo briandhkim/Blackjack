@@ -100,13 +100,14 @@ body > .container-fluid{
 	border-radius: 10px;
 	box-sizing: border-box;
 }
-.player-label{
+.player-label, .dealer-label{
 	margin-left: 15px;
 	font-family: 'Permanent Marker', cursive;
 	text-shadow: 
 	1px 1px 0 #000,
 	-1px -1px 0 #000,
-	2px 2px 0 #000;
+	2px 2px 0 #000,
+	3px 3px 0 #000;
 }
 
 
