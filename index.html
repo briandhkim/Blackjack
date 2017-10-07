@@ -3,6 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Walter+Turncoat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
@@ -51,7 +52,7 @@
                         <h1 class="h1-responsive">
                             <!-- use span below to update current player when player turn is changed -->
                             <span class="currentPlayerUpdate">
-                                Player <span id="#player_number">--</span>'s
+                                Player <span id="player_number">--</span>'s
                                 turn: 
                             </span>
                         </h1>
@@ -63,8 +64,8 @@
 
             <div class="col-sm-9 gameDisplayArea green darken-2"> <!--main game display-->
                 <div class="row dealerArea view">
-                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 dealerDisplay overlay hm-red-light" id="player_0">
-                        <div class="mask pattern-1">
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 dealerDisplay overlay hm-red-slight" id="player_0">
+                        <div class="mask">
                             <h4 class="h4-responsive white-text dealer-label">Today's dealer : 
                                 <span id="ourDealer"></span>
                             </h4>
@@ -72,29 +73,29 @@
                     </div>
                 </div>
                 <div class="row displayMiddle view">
-                    <div class="col-sm-4 view overlay hm-white-light" id="player_1">
-                        <div class="mask pattern-1">
+                    <div class="col-sm-4 view overlay hm-white-slight" id="player_1">
+                        <div class="mask">
                             <h4 class="h4-responsive white-text player-label">Player 1 :</h4>
                         </div>
                     </div>
                     <div class="col-sm-4" id="displayMain">
                         
                     </div>
-                    <div class="col-sm-4 view overlay hm-white-light" id="player_4">
-                        <div class="mask pattern-1">
+                    <div class="col-sm-4 view overlay hm-white-slight" id="player_4">
+                        <div class="mask">
                             <h4 class="h4-responsive white-text player-label">Player 4 :</h4>
                         </div>
                     </div>
                 </div>
                 <div class="row playersArea view">
                     <!-- <div class="col-xs-6 col-sm-3" id="player_1"></div> -->
-                    <div class="col-sm-4 col-sm-offset-2 view overlay hm-white-light" id="player_2">
-                        <div class="mask pattern-1">
+                    <div class="col-sm-4 col-sm-offset-2 view overlay hm-white-slight" id="player_2">
+                        <div class="mask">
                             <h4 class="h4-responsive white-text player-label">Player 2 :</h4>
                         </div>
                     </div>
-                    <div class="col-sm-4 view overlay hm-white-light" id="player_3">
-                        <div class="mask pattern-1">
+                    <div class="col-sm-4 view overlay hm-white-slight" id="player_3">
+                        <div class="mask">
                             <h4 class="h4-responsive white-text player-label">Player 3 :</h4>
                         </div>
                     </div>

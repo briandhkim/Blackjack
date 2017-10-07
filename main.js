@@ -164,14 +164,19 @@ function BlackJack(){
         }
     };
     this.changePlayerTurn = function(){
-        if(self.playerTurn !== self.players_array.length-1){
-            self.playerTurn+=1;
+        var oldPlayerDiv = "#player_" + (this.playerTurn);
+        $(oldPlayerDiv).css("border", "1px dashed blue").addClass("overlay");
+        if(this.playerTurn !== this.players_array.length-1){
+            this.playerTurn+=1;
         }
         else{
             self.playerTurn = 0;
         }
+        var newPlayerDiv = "#player_" + (this.playerTurn);
+        $(newPlayerDiv).css("border", "5px solid gold").removeClass("overlay");
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
-        self.players_array[self.playerTurn].calculator_score();
+        $('#player_number').text(this.playerTurn);
+        self.players_array[this.playerTurn].calculator_score();
     };
    this.compare_score =  function(){
         for(var i = 1; i<self.players_array.length;i++){
@@ -191,6 +196,7 @@ function BlackJack(){
         self.dealer.hand = 0;
         self.dealer.score = 0;
         self.playerTurn = 1;
+        $('#player_number').text(self.playerTurn);
         var number_of_players = $('input[name=playerNum]:checked').val();
         self.addplayers(1 + parseInt(number_of_players));
         var new_deck =  new CreateDeck();
@@ -200,7 +206,8 @@ function BlackJack(){
         console.log(this.deck);
         messageHandler.logMessage("Game started.  Good luck!");
         $('#start_butt').addClass('disabled');
-        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
+        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.");
+        $("#player_" + (this.playerTurn)).css("border", "5px solid gold").removeClass("overlay");
         this.players_array[this.playerTurn].calculator_score();
     }
 }

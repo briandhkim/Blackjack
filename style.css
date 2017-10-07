@@ -3,6 +3,7 @@ html,body{
 }
 /*font-family: 'Permanent Marker', cursive;*/
 /*font-family: 'Walter Turncoat', cursive;*/
+/*font-family: 'Patrick Hand SC', cursive;*/
 body > .container-fluid{
 	height: 100vh;
 }
@@ -123,11 +124,12 @@ body > .container-fluid{
 	margin-right: 5px;
 }
 
-#messageList{
+ul#messageList{
 	list-style: none;
 	font-size: 19px;
 	/*color:#4db6ac;*/
 	color:whitesmoke;
+	font-family: 'Patrick Hand SC', cursive;
 }
 #modal{
 	left:50%;
