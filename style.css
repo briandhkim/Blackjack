@@ -35,6 +35,8 @@ body > .container-fluid{
 	height: 95%;
 	margin-top: 1%;
 	border: 1px solid green;
+	background-image: url("images/background.png");
+	background-size: 100% 100%;
 }
 .dealerArea{
 	height: 25%;
