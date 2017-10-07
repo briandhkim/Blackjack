@@ -34,8 +34,17 @@ function CreateDeck(){
 }//end object
 function make_modals_disappear(){
     $('#modal').css('display','none');
+    // $('#recorderMeme').remove();
     $('#modal_overlay').css('display','none');
 }
+// var recorderVid = $('<iframe>',{
+//     class:'embed-responsive-item',
+//     src : 'https://www.youtube.com/embed/X2WH8mHJnhM?start=17?autoplay=1'
+// });
+// var recorderMeme = $('<div>',{
+//     class:"embed-responsive embed-responsive-4by3",
+//     id: 'recorderMeme'
+// }).append(recorderVid);
 function Player(){
     this.ID = null;
     this.chips = 500;
@@ -62,6 +71,7 @@ function Player(){
             this.bust = true;
             this.stay();
             $('#modal').css('display','block').text('busted');
+            // $('#modal').css('display','block').text('busted').append(recorderMeme);
             $('#modal_overlay').css('display','block');
             setTimeout(make_modals_disappear,2000);
             console.log("player has busted");
