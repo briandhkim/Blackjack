@@ -17,17 +17,20 @@ body > .container-fluid{
 	height: 15%;
 }
 .gameStartInput{
-	height: 5%;
+	height: 15%;
 }
 .gameStartInput > .row{
 	height: 50%;
 }
 .displayFiller{
-	height: 40%;
+	height: 30%;
 }
 .playerTurnButtons{
 	height: 30%;
 	border: 1px solid orange;
+}
+.currentPlayer{
+	height: 30%;
 }
 /*end of css for button area css*/
 
@@ -46,22 +49,27 @@ body > .container-fluid{
 	border: 1px solid blue;
 }
 .displayMiddle{
-	height: 45%;
+	height: 37.5%;
 }
-.displayMiddle>div{
-	height: 80%;
-	margin-top: 5%;
-	border: 1px solid;
+#displayMain{
+	height: 100%;
+	border: 5px solid brown;
+	border-radius: 15%;
+	background-image: url('images/background.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: 0.85;
 }
 .playersArea{
-	height: 30%;
-	margin: 0 1px;
+	height: 37.5%;
+	/*margin: 0 1px;*/
 	/*border: 1px solid;*/
 }
-.playersArea >div{
+#player_1, #player_2, #player_3, #player_4{
 	height: 100%;
 	border: 1px solid blue;
 }
+
 
 .statusDisplay{
 	height: 17%;
