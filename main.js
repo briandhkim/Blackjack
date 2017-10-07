@@ -177,6 +177,8 @@ function BlackJack(){
 
    };
     this.start_game = function(){
+        $('#draw_card').removeClass('disabled');
+        $('#stay').removeClass('disabled');
         self.players_array = [];
         self.dealer.hand = 0;
         self.dealer.score = 0;
@@ -194,16 +196,26 @@ function BlackJack(){
     }
 }
 function handleDrawClick(){
-    var position = game.playerTurn;
-    game.players_array[position].get_card();
-    audioHandler.cardFlip();
+    if($('#draw_card').hasClass('disabled')){
+        return;
+    }
+    else{
+        var position = game.playerTurn;
+        game.players_array[position].get_card();
+        audioHandler.cardFlip();
+    }
 }
 function handleReset(){
    reset();
 }
 function handleStayClick(){
-    var position = game.playerTurn;
-    game.players_array[position].stay();
+    if($('#stay').hasClass('disabled')){
+        return;
+    }
+    else{
+        var position = game.playerTurn;
+        game.players_array[position].stay();
+    }
 }
 function addClickHandlers(){
     $('#draw_card').click(handleDrawClick);
@@ -217,10 +229,17 @@ function init(){
     audioHandler = new AudioHandler();
     messageHandler = new MessageHandler();
     // gameController = new GameController();
+    $('#draw_card').addClass('disabled');
+    $('#stay').addClass('disabled');
     addClickHandlers();
 }
 function handleStartClick(){
-    game.start_game();
+    if($('#start_butt').hasClass('disabled')){
+        return;
+    }
+    else{
+        game.start_game();
+    }
 }
 function reset(){
     $('.hiddenCard').remove();
