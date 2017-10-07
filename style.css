@@ -132,8 +132,14 @@ body > .container-fluid{
 .messageArea, .playerChipsArea{
 	height: 100%;
 	border: 1px solid orange;
+	overflow: auto;
 }
-
+.messageArea::-webkit-scrollbar{
+	width: 5px;
+	height: 6px;
+	background-color: blue;
+	border: 1px solid white;
+}
 ul#messageList{
 	list-style: none;
 	font-size: 18.5px;
