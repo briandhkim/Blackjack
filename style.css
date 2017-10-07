@@ -14,7 +14,7 @@ body > .container-fluid{
 	height: 90%;
 	margin-top: 2.5%;
 	margin-left: 2.08%;
-	border: 1px solid orange;
+	/*border: 1px solid orange;*/
 }
 .gameTitle{
 	height: 15%;
@@ -76,7 +76,7 @@ body > .container-fluid{
 }
 .dealerDisplay{
 	height: 100%;
-	border: 1px solid blue;
+	border: 0.05px dashed blue;
 }
 .displayMiddle{
 	height: 37%;
@@ -99,7 +99,7 @@ body > .container-fluid{
 }
 #player_1, #player_2, #player_3, #player_4{
 	height: 100%;
-	border: 1px solid blue;
+	border: 1px dashed blue;
 	border-radius: 10px;
 	box-sizing: border-box;
 }
