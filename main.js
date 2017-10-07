@@ -42,10 +42,7 @@ function Player(){
     this.ID = null;
     this.chips = 500;
     this.bet =function(){
-        this.bet = $('#get_bet').val()
-    };
-    this.push_bet = function(bet){
-        this.chips-bet;
+        this.chips-=50;
     };
     this.bust = false;
     this.hand = [];
@@ -133,6 +130,7 @@ function Player(){
             if(this.ID === 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
                 view.revealDealerCard();
+                game.compare_score();
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score +".")
             }
             else{
@@ -145,15 +143,14 @@ function Player(){
 function BlackJack(){
     var self = this;
     this.payout = function(player){
-        player.chips += (player.bet)*2;
+        player.chips += 100;
     };
     this.deck = null;
-    this.pool = 0;
     this.deck = null;
     this.deal_cards = function(){
         for(var i = 0; i<this.players_array.length;i++){
-            this.players_array[i].get_card(this.deck);
-            this.players_array[i].get_card(this.deck);
+            self.players_array[i].get_card(this.deck);
+            self.players_array[i].get_card(this.deck);
         }
     };
     this.playerTurn = 1;
@@ -163,22 +160,30 @@ function BlackJack(){
         for(var i = 0; i<number;i++){
             var player =  new Player();
             player.ID = i;
-            this.players_array.push(player);
+            self.players_array.push(player);
         }
     };
     this.changePlayerTurn = function(){
-        if(this.playerTurn !== this.players_array.length-1){
-            this.playerTurn+=1;
+        if(self.playerTurn !== self.players_array.length-1){
+            self.playerTurn+=1;
         }
         else{
-            this.playerTurn = 0;
+            self.playerTurn = 0;
         }
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
-        this.players_array[this.playerTurn].calculator_score();
+        self.players_array[self.playerTurn].calculator_score();
     };
    this.compare_score =  function(){
-
+        for(var i = 1; i<self.players_array.length;i++){
+            if(self.players_array[i].score>self.players_array[0].score){
+                self.payout(self.players_array[i]);
+                console.log(self.players_array[i]," has won!");
+            }
+        }
    };
+   // this.reset_hand(){
+   //
+   //  }
     this.start_game = function(){
         $('#draw_card').removeClass('disabled');
         $('#stay').removeClass('disabled');
