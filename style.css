@@ -14,10 +14,10 @@ body > .container-fluid{
 	border: 1px solid orange;
 }
 .gameTitle{
-	height: 10%;
+	height: 15%;
 }
 .gameStartInput{
-	height: 8%;
+	height: 5%;
 }
 .gameStartInput > .row{
 	height: 50%;
@@ -29,12 +29,35 @@ body > .container-fluid{
 	height: 30%;
 	border: 1px solid orange;
 }
+/*end of css for button area css*/
 
 .gameDisplayArea{
 	height: 95%;
 	margin-top: 1%;
 	border: 1px solid green;
 }
+.dealerArea{
+	height: 25%;
+	margin: 1px 1px;
+	/*border: 1px solid;*/
+}
+.dealerDisplay{
+	height: 100%;
+	border: 1px solid blue;
+}
+.displayMiddle{
+	height: 45%;
+}
+.playersArea{
+	height: 30%;
+	margin: 0 1px;
+	/*border: 1px solid;*/
+}
+.playersArea >div{
+	height: 100%;
+	border: 1px solid blue;
+}
+
 .statusDisplay{
 	height: 17%;
 	border: 1px solid;
