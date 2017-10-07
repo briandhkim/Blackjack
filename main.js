@@ -51,18 +51,19 @@ function Player(){
     }
 }
 function BlackJack(){
-    this.players_array = [];
-        //['dealer':Dealer];
-    this.addplayers = function(number){
-        for(var i = 0; i<number;i++){
-            var player_to_add =  new Player();
-            var key =  "player" +i;
-            this.players_array.push({key:player_to_add});
-        }
-    }
+    this.deck;
     this.playerTurn = 0;
     this.dealer = new Player();
-
+    this.players_array = [];
+    this.addplayers = function(number){
+        for(var i = 0; i<number;i++){
+            var player =  new Player();
+            this.players_array.push(player);
+        }
+    }
+    this.draw = function(){
+        this.players_array[this.playerTurn].get_card(this.deck);
+    }
    this.check_bust = function(player){
        if(player.score>21){
            console.log("player loses");
@@ -86,32 +87,37 @@ function BlackJack(){
    //     }
    //  }//end compare sore
     this.start_game = function(){
+        this.players_array = [];
         this.dealer.hand = 0;
         this.dealer.score = 0;
-        this.addplayers(4);
+        var number_of_players = $('input[name=playerNum]:checked').val();
+        this.addplayers(number_of_players);
         console.log('players',this.players_array);
         var new_deck =  new CreateDeck();
-        var deck = new_deck.make_deck();
-        console.log(deck);
-        addClickHandlers();
+        this.deck = new_deck.make_deck();
+        console.log(this.deck);
     }
 }
 function handleDrawClick(){
 
 }
 function handleStayClick(){
-    game.players_array[].get_card();
+    var position = game.playerTurn;
+    game.players_array[position].get_card();
 }
 function addClickHandlers(){
     $('#draw_card').click(handleDrawClick);
     $('#stay').click(handleStayClick);
+    $('#start_butt').click(handleStartClick);
 }
 function init(){
     game = new BlackJack();
     view = new View();
+    addClickHandlers();
+}
+function handleStartClick(){
     game.start_game();
 }
-
 function View(){
     this.createCardDom = function(card, playerSpaceID){
         var cardImage = "images/" + card.value + "_" + card.suit + ".png";
