@@ -34,14 +34,19 @@ function CreateDeck(){
 }//end object
 
 function Player(){
+    this.chips = 500;
+    this.bet =function(num){
+        this.chips - num;
+        game.pool += num;
+    }
     this.bust = false;
     this.hand = [];
     this.score = 0;
     this.staying = false;
     this.get_card = function(deck){
         this.hand.push(deck.pop());
-        console.log('hand',this.hand);
         this.calculator_score();
+        console.log('hand',this.hand);
         console.log('score',this.score)
     };
     this.check_bust = function(){
@@ -82,6 +87,10 @@ function Player(){
 }
 function BlackJack(){
     var self = this;
+    this.pool = 0;
+    this.payout = function(payout){
+        game.players_array[this.playerTurn].chips += payout;
+    }
     this.deck;
     this.deal_cards = function(){
         for(var i = 0; i<this.players_array.length;i++){
