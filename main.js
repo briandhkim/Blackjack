@@ -179,12 +179,28 @@ function BlackJack(){
         self.players_array[this.playerTurn].calculator_score();
     };
    this.compare_score =  function(){
+       var dealer_win = true;
+       $('#modal').text('');
         for(var i = 1; i<self.players_array.length;i++){
             if(self.players_array[i].score>self.players_array[0].score){
                 self.payout(self.players_array[i]);
                 console.log(self.players_array[i]," has won!");
+                var player_that_won = $('<p>').text('Player '+i +' has won!')
+                $('#modal').css('display','block').append(player_that_won);
+                dealer_win = false;
             }
         }
+        if(dealer_win){
+            $('#modal').css('display','block').text('Dealer Wins!');
+        }
+        for(var i =0; i<self.players_array.length; i++){
+            self.players_array[i].hand = [];
+            self.players_array[i].bust = false;
+        }
+       clearCard();
+       self.deal_cards();
+       setTimeout(make_modals_disappear,3000);
+
    };
    // this.reset_hand(){
    //
@@ -210,6 +226,10 @@ function BlackJack(){
         $("#player_" + (this.playerTurn)).css("border", "5px solid gold").removeClass("overlay");
         this.players_array[this.playerTurn].calculator_score();
     }
+}
+function clearCard(){
+    $('.hiddenCard').remove();
+    $('.displayedCard').remove();
 }
 function handleDrawClick(){
     if($('#draw_card').hasClass('disabled')){
@@ -258,8 +278,7 @@ function handleStartClick(){
     }
 }
 function reset(){
-    $('.hiddenCard').remove();
-    $('.displayedCard').remove();
+    clearCard();
     game.start_game();
 }
 function View(){
