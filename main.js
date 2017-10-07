@@ -66,7 +66,7 @@ function Player(){
             if(game.playerTurn !== 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
                 console.log("player has busted");
-                $('#modal').css('display','block').text('BUSTED!');
+                $('#modal').css('display','block').text('BUSTED!').css("color", "red");
                 $('#modal_overlay').css('display','block');
                 setTimeout(make_modals_disappear,1000);
             }
@@ -98,6 +98,11 @@ function Player(){
             }
             if(this.score === 21){
                 this.stay();
+                if (this.ID !== 0) {
+                    $('#modal').css('display', 'block').text('21!').css("color", "green");
+                    $('#modal_overlay').css('display', 'block');
+                    setTimeout(make_modals_disappear, 1000);
+                }
             }
             if(this.hand.length>2 && this.score !== 21){
                 if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
@@ -115,8 +120,11 @@ function Player(){
             if(this.ID === 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
                 view.revealDealerCard();
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score +".")
             }
-            messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
+            else{
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
+            }
         }
         game.changePlayerTurn();
     }
@@ -161,6 +169,7 @@ function BlackJack(){
         self.players_array = [];
         self.dealer.hand = 0;
         self.dealer.score = 0;
+        self.playerTurn = 1;
         var number_of_players = $('input[name=playerNum]:checked').val();
         self.addplayers(1 + parseInt(number_of_players));
         var new_deck =  new CreateDeck();
