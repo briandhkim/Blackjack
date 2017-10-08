@@ -8,6 +8,7 @@ function BlackJack(){
     this.payout = function(player){
         player.chips += 100;
     };
+    this.gameStarted = false;
     this.deck = null;
     this.deck = null;
     this.deal_cards = function(){
@@ -59,19 +60,20 @@ function BlackJack(){
    this.compare_score =  function(){
        var dealer_win = true;
        $('#modal').text('');
-        for(var i = 1; i<self.players_array.length;i++){
-            if(self.players_array[i].score>self.players_array[0].score){
+        for(var i = 1; i<self.players_array.length;i++) {
+            if (self.players_array[i].score > self.players_array[0].score) {
                 self.payout(self.players_array[i]);
-                console.log(self.players_array[i]," has won!");
-                var player_that_won = $('<p>').text('Player '+i +' has won!')
-                $('#modal').css('display','block').append(player_that_won);
+                console.log(self.players_array[i], " has won!");
+                var player_that_won = $('<p>').text('Player ' + i + ' has won!')
+                $('#modal').css('display', 'block').append(player_that_won);
                 dealer_win = false;
             }
-            else{
-                if(self.players_array[i].chips<=0) {
+            else {
+                if (self.players_array[i].chips <= 0) {
                     self.players_array.splice(i, 1);
                     i--;
                 }
+            }
         }
         if(dealer_win){
             $('#modal').css('display','block').text('Dealer Wins!');
@@ -80,7 +82,6 @@ function BlackJack(){
             self.players_array[i].hand = [];
             self.players_array[i].bust = false;
             }
-        }
        game.changePlayerTurn();
         disableAllbuttons();
        $('#reset_butt').removeClass('disabled');
@@ -96,6 +97,7 @@ function BlackJack(){
         }
     }
     this.start_game = function(){
+        self.gameStarted = true;
         $('#draw_card').removeClass('disabled');
         $('#stay').removeClass('disabled');
         $('#reset_butt').addClass('disabled');
@@ -115,6 +117,7 @@ function BlackJack(){
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.");
         $("#player_" + (this.playerTurn)).css("border", "5px solid gold").removeClass("overlay");
         self.calculator_score_start();
+        self.gameStarted = false;
     }
 }
 function clearCard(){

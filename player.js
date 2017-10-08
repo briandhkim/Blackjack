@@ -55,7 +55,7 @@ function Player(){
                 self.score += 10;
             }
         }
-        if(self.score === 21 && game.playerTurn!==0){
+        if(self.score === 21 && game.playerTurn!==0 && game.gameStarted===false){
             self.stay();
             if (self.ID !== 0) {
                 $('#modal').css('display', 'block').text('21!').css("color", "green");
