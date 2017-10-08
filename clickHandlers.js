@@ -7,7 +7,7 @@ function reset(){
     }
     clearCard();
     $('.cpuText').removeClass('dealerTurnText');
-    game.start_game();
+    game.end_round();
 }
 function handleDrawClick(){
     if($('#draw_card').hasClass('disabled')){
@@ -36,10 +36,9 @@ function addClickHandlers(){
 function disableAllbuttons(){
     $('#draw_card').addClass('disabled');
     $('#stay').addClass('disabled');
-    $('#reset_butt').addClass('disabled');
 }
 function reEnableButtons(){
     $('#draw_card').removeClass('disabled');
     $('#stay').removeClass('disabled');
-    $('#reset_butt').removeClass('disabled');
+    $('#start_butt').removeClass('disabled');
 }

@@ -54,6 +54,7 @@ function BlackJack(){
         make_modals_disappear();
         reEnableButtons();
         self.all_players_bet();
+        $('#reset_butt').addClass('disabled');
     }
    this.compare_score =  function(){
        var dealer_win = true;
@@ -81,16 +82,22 @@ function BlackJack(){
             }
         }
         disableAllbuttons();
-        setTimeout(self.end_round,3000);
+       $('#reset_butt').removeClass('disabled');
    };
     this.all_players_bet = function(){
-        for(var i = 1; i<game.players_array.length;i++){
-            game.players_array[i].bet();
+        for(var i = 1; i<self.players_array.length;i++){
+            self.players_array[i].bet();
         }
     };
+    this.calculator_score_start = function(){
+        for(var i = 0; i<self.players_array.length;i++){
+            self.players_array[i].calculator_score();
+        }
+    }
     this.start_game = function(){
         $('#draw_card').removeClass('disabled');
         $('#stay').removeClass('disabled');
+        $('#reset_butt').addClass('disabled');
         self.players_array = [];
         self.dealer.hand = 0;
         self.dealer.score = 0;
@@ -104,11 +111,10 @@ function BlackJack(){
         console.log('players',this.players_array);
         console.log(this.deck);
         messageHandler.logMessage("Game started.  Good luck!");
-        $('#start_butt').addClass('disabled');
         this.all_players_bet();
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.");
         $("#player_" + (this.playerTurn)).css("border", "5px solid gold").removeClass("overlay");
-        this.players_array[this.playerTurn].calculator_score();
+        self.calculator_score_start();
     }
 }
 function clearCard(){
