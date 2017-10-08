@@ -63,12 +63,12 @@ function Player(){
     //             setTimeout(make_modals_disappear, 1000);
     //         }
     //     }
-        if(this.hand.length>2 && this.score !== 21){
-            if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
-            }
-        }
-    }
+    //     if(this.hand.length>2 && this.score !== 21){
+    //         if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
+    //             messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
+    //         }
+    //     }
+    // }
     this.calculator_score = function(){
         self.score = 0;
         for(var i = 0; i<self.hand.length; i++){
