@@ -55,7 +55,7 @@ function Player(){
                 self.score += 10;
             }
         }
-        if(self.score === 21){
+        if(self.score === 21 && game.playerTurn!==0){
             self.stay();
             if (self.ID !== 0) {
                 $('#modal').css('display', 'block').text('21!').css("color", "green");
@@ -106,7 +106,6 @@ function Player(){
             if(this.score >= highestScore){
                 console.log("DEALER WINS");
                 console.log(highestScore)
-                game.changePlayerTurn();
             }
             else{
                 console.log("non busted people win!");

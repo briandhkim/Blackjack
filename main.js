@@ -81,7 +81,7 @@ function BlackJack(){
             self.players_array[i].bust = false;
             }
         }
-        game.changePlayerTurn();
+       game.changePlayerTurn();
         disableAllbuttons();
        $('#reset_butt').removeClass('disabled');
    };
@@ -91,7 +91,7 @@ function BlackJack(){
         }
     };
     this.calculator_score_start = function(){
-        for(var i = 0; i<self.players_array.length;i++){
+        for(var i = 1; i<self.players_array.length;i++){
             self.players_array[i].calculator_score();
         }
     }
