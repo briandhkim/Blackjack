@@ -29,7 +29,10 @@ function Player(){
             if(game.playerTurn !== 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
                 console.log("player has busted");
-                $('#modal').css('display','block').text('BUSTED!').css("color", "red")/*.append(recorderMeme)*/;
+                $('#modal').css({
+                    'display' : 'block',
+                    'color' : 'red'
+                }).text('BUSTED!')/*.append(recorderMeme)*/;
                 $('#modal_overlay').css('display','block');
                 setTimeout(make_modals_disappear,1000);
             }
@@ -57,7 +60,11 @@ function Player(){
         if(self.score === 21 && game.playerTurn!==0 && game.gameStarted===false){
             self.stay();
             if (self.ID !== 0) {
-                $('#modal').css('display', 'block').text('21!').css("color", "white").css("font-size", "5em");
+                $('#modal').css({
+                    'display' : 'block',
+                    'color' : 'white',
+                    'font-size' : '5em'
+                }).text('21!');
                 $('#modal_overlay').css('display', 'block');
                 setTimeout(make_modals_disappear, 1000);
             }

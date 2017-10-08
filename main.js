@@ -1,7 +1,7 @@
 function make_modals_disappear(){
-    $('#modal').css('display','none');
+    $('#modal').css('display','none').text('');
     $('#modal_overlay').css('display','none');
-    $('#modal').text('');
+    // $('#modal').text('');
 }
 function BlackJack(){
     var self = this;
@@ -64,7 +64,10 @@ function BlackJack(){
             if (self.players_array[i].score > self.players_array[0].score) {     // && !self.players_array[i].bust
                 self.payout(self.players_array[i]);
                 console.log(self.players_array[i], " has won!");
-                var player_that_won = $('<p>').text('Player ' + i + ' has won!').css("font-size", "0.5em").css("color", "white");
+                var player_that_won = $('<p>').text('Player ' + i + ' has won!').css({
+                    'font-size': '0.5em',
+                    'color' : 'white'
+                });
                 $('#modal').css('display', 'block').append(player_that_won);
                 messageHandler.logMessage('Player ' + i + ' has won!');
                 dealer_win = false;
@@ -145,15 +148,23 @@ function View(){
             cardImage = "images/" + card.value + "_" + card.suit + ".png";
         }
         var divID = "#player_" + (playerSpaceID);
-        var cardDiv = $("<div>")
-            .css("width", "75px")
-            .css("height", "105px")
-            .css("background-image", 'url(' + cardImage + ')')
-            .css("background-size", "100% 100%")
-            .css("background-repeat", "no-repeat")
-            .css("display", "inline-block")
-            .css("margin", "10px")
-            .addClass(className);
+        var cardDiv = $("<div>").css({
+            'width'             : '75px',
+            'height'            : '105px',
+            'background-image'  : 'url('+cardImage+')',
+            'background-size'   : '100% 100%',
+            'background-repeat' : 'no-repeat',
+            'display'           : "inline-block",
+            'margin'            : '10px'  
+        }).addClass(className);
+            // .css("width", "75px")
+            // .css("height", "105px")
+            // .css("background-image", 'url(' + cardImage + ')')
+            // .css("background-size", "100% 100%")
+            // .css("background-repeat", "no-repeat")
+            // .css("display", "inline-block")
+            // .css("margin", "10px")
+            // .addClass(className);
         $(divID).append(cardDiv);
     };
     this.revealDealerCard = function(){
