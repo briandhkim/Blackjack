@@ -80,8 +80,8 @@ function BlackJack(){
             }
         }
         if(dealer_win){
-            $('#modal').css('display','block').text('Dealer Wins!');
-            messageHandler.logMessage("Dealer Wins!");
+            $('#modal').css('display','block').text('The House Wins!').css("font-size", "3em");
+            messageHandler.logMessage("The House Wins!");
         }
         for(var i =0; i<self.players_array.length; i++){
             self.players_array[i].hand = [];
@@ -105,6 +105,7 @@ function BlackJack(){
     }
     this.start_game = function(){
         self.gameStarted = true;
+        $('.cpuText').removeClass('dealerTurnText');
         $('#draw_card').removeClass('disabled');
         $('#stay').removeClass('disabled');
         $('#reset_butt').addClass('disabled');
