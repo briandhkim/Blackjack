@@ -99,7 +99,6 @@ function BlackJack(){
         $('#draw_card').removeClass('disabled');
         $('#stay').removeClass('disabled');
         $('#reset_butt').addClass('disabled');
-        self.end_round();
         self.players_array = [];
         self.dealer.hand = 0;
         self.dealer.score = 0;
@@ -109,7 +108,7 @@ function BlackJack(){
         self.addplayers(1 + parseInt(number_of_players));
         var new_deck =  new CreateDeck();
         self.deck = new_deck.make_deck();
-        self.deal_cards();
+        self.end_round();
         console.log('players',this.players_array);
         console.log(this.deck);
         messageHandler.logMessage("Game started.  Good luck!");
