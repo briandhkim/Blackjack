@@ -95,7 +95,7 @@ function Player(){
                 // game.compare_score();
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score +".")
             }
-            else{
+            else if(this.score !== 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Stays with " + this.score +".")
             }
         }
