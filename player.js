@@ -10,7 +10,11 @@ function Player(){
     this.hand = [];     //array for holding current card objects in hand
     this.score = 0;     //tracks card values; e.g. 9 of hearts and 2 of spades = 11
     this.staying = false;   //used for checking player turn change(?); check this.stay function
-    this.get_card = function(){ 
+    this.get_card = function(){
+        if(game.deck.length === 0){
+            var new_deck =  new CreateDeck();
+            game.deck = new_deck.make_deck();
+        }
         var cardDraw = game.deck.pop();
         this.hand.push(cardDraw);
         if(self.hand.length > 2 && self.score !== 21) {
@@ -105,10 +109,6 @@ function Player(){
             }
             view.revealDealerCard();
             game.compare_score();
-            if(game.deck.length<20){
-                var new_deck =  new CreateDeck();
-                game.deck = new_deck.make_deck();
-            }
             view.updatePlayerChips();
         }
     }
