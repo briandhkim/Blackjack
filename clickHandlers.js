@@ -1,4 +1,8 @@
 function handleStartClick(){
+    $("#player_0").css("border", "1px dashed blue").addClass("overlay");
+    $("#player_1").css("border", "1px dashed blue").addClass("overlay");
+    $("#player_2").css("border", "1px dashed blue").addClass("overlay");
+    $("#player_3").css("border", "1px dashed blue").addClass("overlay");
     game.start_game();
 }
 function reset(){
@@ -7,6 +11,10 @@ function reset(){
     }
     clearCard();
     $('.cpuText').removeClass('dealerTurnText');
+    $("#player_0").css("border", "1px dashed blue").addClass("overlay");
+    $("#player_1").css("border", "1px dashed blue").addClass("overlay");
+    $("#player_2").css("border", "1px dashed blue").addClass("overlay");
+    $("#player_3").css("border", "1px dashed blue").addClass("overlay");
     game.end_round();
 }
 function handleDrawClick(){
