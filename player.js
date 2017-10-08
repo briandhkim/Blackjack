@@ -1,15 +1,16 @@
 function Player(){
     var self = this;
-    this.ID = null;
-    this.chips = 500;
-    this.bet =function(){
+    this.ID = null;     //used for tracking player; dealer is 0
+    this.chips = 500;   //all players start with default 500 chips; at this time, dealer also starts with 500
+    this.bet =function(){   
         self.chips-=50;
+        //this.chips -=50; //self should not be necessary in this case
     };
-    this.bust = false;
-    this.hand = [];
-    this.score = 0;
-    this.staying = false;
-    this.get_card = function(){
+    this.bust = false;  //set to true when player score goes over 21
+    this.hand = [];     //array for holding current card objects in hand
+    this.score = 0;     //tracks card values; e.g. 9 of hearts and 2 of spades = 11
+    this.staying = false;   //used for checking player turn change(?); check this.stay function
+    this.get_card = function(){ 
         var cardDraw = game.deck.pop();
         this.hand.push(cardDraw);
         if(self.hand.length > 2 && self.score !== 21) {
@@ -94,7 +95,7 @@ function Player(){
             game.players_array[0].calculator_score();
             var highestScore = game.players_array[1].score;
             for(var i = 2; i <game.players_array.length; i++){
-                if(game.players_array[i].score > highestScore){
+                if(game.players_array[i].score > highestScore){     //&& !game.players_array[i].bust --for the high score to count, the bust condition must be false
                     highestScore = game.players_array[i].score;
                 }
             }

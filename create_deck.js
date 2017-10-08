@@ -10,7 +10,7 @@ function CreateDeck(){
                 this.deck.push(card);
             }//end for
         }//end outer for
-    }//end create deck
+    };//end create deck
     this.shuffleDeck = function(){
         var shuffledDeck = [];
         while(this.deck.length>0){
@@ -18,10 +18,10 @@ function CreateDeck(){
             shuffledDeck.push(this.deck.splice(random_pick,1)[0]);
         }//end while
         this.deck = shuffledDeck;
-    }//end shuffled deck
+    };//end shuffled deck
     this.make_deck = function(){
         this.create_cards();
         this.shuffleDeck();
         return this.deck;
-    }
+    };
 }//end object

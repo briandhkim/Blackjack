@@ -61,7 +61,7 @@ function BlackJack(){
        var dealer_win = true;
        $('#modal').text('');
         for(var i = 1; i<self.players_array.length;i++) {
-            if (self.players_array[i].score > self.players_array[0].score) {
+            if (self.players_array[i].score > self.players_array[0].score) {     // && !self.players_array[i].bust
                 self.payout(self.players_array[i]);
                 console.log(self.players_array[i], " has won!");
                 var player_that_won = $('<p>').text('Player ' + i + ' has won!')
