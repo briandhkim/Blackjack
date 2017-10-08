@@ -92,13 +92,12 @@ function Player(){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score +".")
             }
             else{
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Stays with " + this.score +".")
             }
         }
         game.changePlayerTurn();
     };
     this.dealerAI = function(){
-        console.log("Dealer AI");
         if(this.ID === 0){
             game.players_array[0].calculator_score();
             var highestScore = game.players_array[1].score;
@@ -107,19 +106,10 @@ function Player(){
                     highestScore = game.players_array[i].score;
                 }
             }
-            while(game.players_array[0].score < highestScore && this.score !== 0){
-                console.log(this.score);
+            while(this.score < 17 && this.score !== 0){
                 this.get_card();
             }
             view.revealDealerCard();
-            if(self.score >= highestScore){
-                console.log("DEALER WINS");
-                console.log(highestScore)
-            }
-            else{
-                console.log("non busted people win!");
-                console.log(highestScore)
-            }
             game.compare_score();
             if(game.deck.length<20){
                 var new_deck =  new CreateDeck();

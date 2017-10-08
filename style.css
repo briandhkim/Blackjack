@@ -168,7 +168,7 @@ ul#messageList{
 	transform:translate(-50%,-35%);
 	display:none;
 	font-size:4em;
-	color:red;
+	color:darkred;
 	text-align: center;
 }
 #modal_overlay{
