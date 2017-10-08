@@ -1,170 +1,7 @@
-$(document).ready(init);
-var game =null;
-var view = null;
-var messageHandler = null;
-var audioHandler = null;
-// var gameController = null;
-
-function CreateDeck(){
-    this.deck=[];
-    this.create_cards = function(){
-        var suits = ['Spades', 'Hearts', 'Diamonds','Clubs'];
-        for(var j = 0; j<suits.length; j++){
-            for(var i = 1; i<14; i++){
-                var card = {};
-                card.suit = suits[j];
-                card.value = i;
-                this.deck.push(card);
-            }//end for
-        }//end outer for
-    }//end create deck
-    this.shuffleDeck = function(){
-        var shuffledDeck = [];
-        while(this.deck.length>0){
-            var random_pick = Math.floor(Math.random()*this.deck.length);
-            shuffledDeck.push(this.deck.splice(random_pick,1)[0]);
-        }//end while
-        this.deck = shuffledDeck;
-    }//end shuffled deck
-    this.make_deck = function(){
-        this.create_cards();
-        this.shuffleDeck();
-        return this.deck;
-    }
-}//end object
 function make_modals_disappear(){
     $('#modal').css('display','none');
-    // $('#recorderMeme').remove();
     $('#modal_overlay').css('display','none');
     $('#modal').text('');
-}
-
-function Player(){
-    var self = this;
-    this.ID = null;
-    this.chips = 500;
-    this.bet =function(){
-        self.chips-=50;
-    };
-    this.bust = false;
-    this.hand = [];
-    this.score = 0;
-    this.staying = false;
-    this.get_card = function(){
-        var cardDraw = game.deck.pop();
-        this.hand.push(cardDraw);
-        if(self.hand.length > 2 && self.score !== 21) {
-            messageHandler.logMessage(messageHandler.currentPlayerString() + "Hit me!");
-        }
-        if(this.hand.length > 2) {
-            self.calculator_score();
-            console.log('score',self.score)
-        }
-        view.createCardDom(cardDraw, self.ID);
-        console.log('hand',self.hand);
-    };
-    // var recorderVid = $('<iframe>',{
-    //     class:'embed-responsive-item',
-    //     src : 'https://www.youtube.com/embed/X2WH8mHJnhM?start=17?autoplay=1'
-    // });
-    // var recorderMeme = $('<div>',{
-    //     class:"embed-responsive embed-responsive-4by3",
-    //     id: 'recorderMeme'
-    // }).append(recorderVid);
-    this.check_bust = function(){
-        if(self.score>21){
-            self.bust = true;
-            if(game.playerTurn !== 0){
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
-                console.log("player has busted");
-                $('#modal').css('display','block').text('BUSTED!').css("color", "red")/*.append(recorderMeme)*/;
-
-                $('#modal_overlay').css('display','block');
-                setTimeout(make_modals_disappear,1000);
-                self.stay();
-                return;
-            }
-            else{
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!")
-                view.revealDealerCard();
-                self.stay();
-                return;
-           }
-        }
-    };
-    this.calculator_score = function(){
-        self.score = 0;
-        for(var i = 0; i<self.hand.length; i++){
-            if(self.hand[i].value>10){
-                self.score += 10;
-            }
-            else{
-                self.score += this.hand[i].value;
-            }
-        }
-        for(var i = 0; i<self.hand.length; i++){//convert Ace to 11 or 1
-            if(self.hand[i].value === 1 && self.score<=11){
-                self.score += 10;
-            }
-        }
-        if(self.score === 21){
-            self.stay();
-            if (self.ID !== 0) {
-                $('#modal').css('display', 'block').text('21!').css("color", "green");
-                $('#modal_overlay').css('display', 'block');
-                setTimeout(make_modals_disappear, 1000);
-            }
-        }
-        if(this.hand.length>2 && this.score !== 21){
-            if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
-            }
-        }
-        this.check_bust();
-        if(self.bust){
-            self.score = 0;
-        }
-    };
-    this.stay = function(){
-        this.staying = true;
-        if(this.score <= 21) {
-            if(this.ID === 0){
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
-                view.revealDealerCard();
-                game.compare_score();
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score +".")
-            }
-            else{
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Stay with " + this.score +".")
-            }
-        }
-        game.changePlayerTurn();
-    };
-    this.dealerAI = function(){
-        console.log("Dealer AI");
-        if(this.ID === 0){
-            this.calculator_score();
-            var highestScore = 0;
-            for(var i = 1; i <game.players_array.length; i++){
-                if(game.players_array[i].score > 16){
-                    highestScore = game.players_array[i].score;
-                }
-            }
-            while(this.score < highestScore && this.score !== 0){
-                console.log(this.score);
-                this.get_card();
-            }
-            view.revealDealerCard();
-            if(this.score >= highestScore){
-                console.log("DEALER WINS");
-                console.log(highestScore)
-            }
-            else{
-                console.log("non busted people win!");
-                console.log(highestScore)
-            }
-        }
-    }
 }
 function BlackJack(){
     var self = this;
@@ -213,6 +50,12 @@ function BlackJack(){
 
         }
     };
+    this.end_round = function(){
+        clearCard();
+        self.deal_cards();
+        make_modals_disappear();
+        reEnableButtons();
+    }
    this.compare_score =  function(){
        var dealer_win = true;
        $('#modal').text('');
@@ -232,14 +75,9 @@ function BlackJack(){
             self.players_array[i].hand = [];
             self.players_array[i].bust = false;
         }
-       clearCard();
-       self.deal_cards();
-       setTimeout(make_modals_disappear,3000);
-
+        disableAllbuttons();
+        setTimeout(self.end_round,3000);
    };
-   // this.reset_hand(){
-   //
-   //  }
     this.start_game = function(){
         $('#draw_card').removeClass('disabled');
         $('#stay').removeClass('disabled');
@@ -265,57 +103,6 @@ function BlackJack(){
 function clearCard(){
     $('.hiddenCard').remove();
     $('.displayedCard').remove();
-}
-function handleDrawClick(){
-    if($('#draw_card').hasClass('disabled')){
-        return;
-    }
-    else{
-        var position = game.playerTurn;
-        game.players_array[position].get_card();
-        audioHandler.cardFlip();
-    }
-}
-function handleReset(){
-   reset();
-}
-function handleStayClick(){
-    if($('#stay').hasClass('disabled')){
-        return;
-    }
-    else{
-        var position = game.playerTurn;
-        game.players_array[position].stay();
-    }
-}
-function addClickHandlers(){
-    $('#draw_card').click(handleDrawClick);
-    $('#stay').click(handleStayClick);
-    $('#start_butt').click(handleStartClick);
-    $('#reset_butt').click(handleReset);
-}
-function init(){
-    game = new BlackJack();
-    view = new View();
-    audioHandler = new AudioHandler();
-    messageHandler = new MessageHandler();
-    // gameController = new GameController();
-    $('#draw_card').addClass('disabled');
-    $('#stay').addClass('disabled');
-    addClickHandlers();
-}
-function handleStartClick(){
-    if($('#start_butt').hasClass('disabled')){
-        return;
-    }
-    else{
-        game.start_game();
-    }
-}
-function reset(){
-    clearCard();
-    $('.cpuText').removeClass('dealerTurnText');
-    game.start_game();
 }
 function View(){
     this.createCardDom = function(card, playerSpaceID){
