@@ -10,7 +10,6 @@ function BlackJack(){
     };
     this.gameStarted = false;
     this.deck = null;
-    this.deck = null;
     this.deal_cards = function(){
         for(var i = 0; i<this.players_array.length;i++){
             self.players_array[i].get_card(this.deck);

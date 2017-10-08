@@ -30,10 +30,8 @@ function Player(){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
                 console.log("player has busted");
                 $('#modal').css('display','block').text('BUSTED!').css("color", "red")/*.append(recorderMeme)*/;
-
                 $('#modal_overlay').css('display','block');
                 setTimeout(make_modals_disappear,1000);
-                self.stay();
             }
             else{
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!")
@@ -64,14 +62,15 @@ function Player(){
                 setTimeout(make_modals_disappear, 1000);
             }
         }
-        if(this.hand.length>2 && this.score !== 21){
-            if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
+        if(self.hand.length>2 && self.score !== 21){
+            if(self.ID !== 0 || self.score > 21) {//keep dealer score hidden until the end
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + self.score);
             }
         }
-        this.check_bust();
+        self.check_bust();
         if(self.bust){
             self.score = 0;
+            this.stay();
         }
     };
     this.stay = function(){
@@ -104,7 +103,7 @@ function Player(){
                 this.get_card();
             }
             view.revealDealerCard();
-            if(this.score >= highestScore){
+            if(self.score >= highestScore){
                 console.log("DEALER WINS");
                 console.log(highestScore)
             }
