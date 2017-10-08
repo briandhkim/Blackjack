@@ -98,6 +98,7 @@ function BlackJack(){
         $('#draw_card').removeClass('disabled');
         $('#stay').removeClass('disabled');
         $('#reset_butt').addClass('disabled');
+        self.end_round();
         self.players_array = [];
         self.dealer.hand = 0;
         self.dealer.score = 0;
@@ -111,7 +112,6 @@ function BlackJack(){
         console.log('players',this.players_array);
         console.log(this.deck);
         messageHandler.logMessage("Game started.  Good luck!");
-        this.all_players_bet();
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.");
         $("#player_" + (this.playerTurn)).css("border", "5px solid gold").removeClass("overlay");
         self.calculator_score_start();

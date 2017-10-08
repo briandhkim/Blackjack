@@ -92,9 +92,9 @@ function Player(){
         console.log("Dealer AI");
         if(this.ID === 0){
             this.calculator_score();
-            var highestScore = 0;
-            for(var i = 1; i <game.players_array.length; i++){
-                if(game.players_array[i].score > 16){
+            var highestScore = game.players_array[1].score;
+            for(var i = 2; i <game.players_array.length; i++){
+                if(game.players_array[i].score > highestScore){
                     highestScore = game.players_array[i].score;
                 }
             }

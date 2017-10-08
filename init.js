@@ -11,5 +11,6 @@ function init(){
     // gameController = new GameController();
     $('#draw_card').addClass('disabled');
     $('#stay').addClass('disabled');
+    $('#reset_butt').addClass('disabled');
     addClickHandlers();
 }
