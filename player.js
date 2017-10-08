@@ -100,12 +100,6 @@ function Player(){
     this.dealerAI = function(){
         if(this.ID === 0){
             game.players_array[0].calculator_score();
-            var highestScore = game.players_array[1].score;
-            for(var i = 2; i <game.players_array.length; i++){
-                if(game.players_array[i].score > highestScore){     //&& !game.players_array[i].bust --for the high score to count, the bust condition must be false
-                    highestScore = game.players_array[i].score;
-                }
-            }
             while(this.score < 17 && this.score !== 0){
                 this.get_card();
             }
