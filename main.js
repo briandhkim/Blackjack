@@ -64,7 +64,7 @@ function BlackJack(){
             if (self.players_array[i].score > self.players_array[0].score) {     // && !self.players_array[i].bust
                 self.payout(self.players_array[i]);
                 console.log(self.players_array[i], " has won!");
-                var player_that_won = $('<p>').text('Player ' + i + ' has won!').css("font-size", "0.75em").css("color", "black");
+                var player_that_won = $('<p>').text('Player ' + i + ' has won!').css("font-size", "0.5em").css("color", "white");
                 $('#modal').css('display', 'block').append(player_that_won);
                 messageHandler.logMessage('Player ' + i + ' has won!');
                 dealer_win = false;

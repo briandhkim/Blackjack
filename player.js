@@ -57,7 +57,7 @@ function Player(){
         if(self.score === 21 && game.playerTurn!==0 && game.gameStarted===false){
             self.stay();
             if (self.ID !== 0) {
-                $('#modal').css('display', 'block').text('21!').css("color", "black");
+                $('#modal').css('display', 'block').text('21!').css("color", "white").css("font-size", "5em");
                 $('#modal_overlay').css('display', 'block');
                 setTimeout(make_modals_disappear, 1000);
             }
