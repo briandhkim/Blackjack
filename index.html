@@ -17,7 +17,7 @@
     <script src="create_deck.js"></script>
     <script src="clickHandlers.js"></script>
     <script src="main.js"></script>
-    <title>our lord harry</title>
+    <title>Project Badass - Blackjack</title>
 </head>
 <body>
 	<div class="container-fluid teal lighten-2">
@@ -67,6 +67,8 @@
             </div> <!--end of buttonanddisplay div-->
 
             <div class="col-sm-9 gameDisplayArea green darken-2"> <!--main game display-->
+                <div id="modal"></div>
+                <div id="modal_overlay"></div>
                 <div class="row dealerArea view">
                     <div class="col-xs-12 col-sm-6 col-sm-offset-3 dealerDisplay overlay hm-red-slight" id="player_0">
                         <div class="mask">
@@ -83,7 +85,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4" id="displayMain">
-                        
+
                     </div>
                     <div class="col-sm-4 view overlay hm-white-slight" id="player_4">
                         <div class="mask">
@@ -119,12 +121,26 @@
                     <li id = "message_4"></li>
                 </ul>
             </div>
-            <div class="col-sm-8 col-md-9 col-lg-10 playerChipsArea">
+            <div class="col-sm-8 col-md-9 col-lg-10 playerChipsArea container">
+                <div class = "col-sm-3 playerChipsArea">
+                    <br>
+                    <p id="player1ChipsText">Player 1 Chips = <span id="player1Chips">500</span></p>
+                </div>
+                <div class = "col-sm-3 playerChipsArea">
+                    <br>
+                    <p id="player2ChipsText">Player 2 Chips = <span id="player2Chips">500</span></p>
+                </div>
+                <div class = "col-sm-3 playerChipsArea">
+                    <br>
+                    <p id="player3ChipsText">Player 3 Chips = <span id="player3Chips">500</span></p>
+                </div>
+                <div class = "col-sm-3 playerChipsArea">
+                    <br>
+                    <p id="player4ChipsText">Player 4 Chips = <span id="player4Chips">500</span></p>
+                </div>
                 
             </div>
         </div>  <!--end of statusDisplay div-->
-        <div id="modal"></div>
-        <div id="modal_overlay"></div>
 	</div> <!--end of container-fluid main-->
 </body>
 </html>

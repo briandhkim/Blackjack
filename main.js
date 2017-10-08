@@ -37,7 +37,7 @@ function BlackJack(){
         }
         var newPlayerDiv = "#player_" + (this.playerTurn);
         $(newPlayerDiv).css("border", "5px solid gold").removeClass("overlay");
-        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
+        messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.");
         $('#player_number').text(this.playerTurn);
         if(self.playerTurn ===0){
             $('#player_number').text('Dealer'); 
@@ -55,7 +55,8 @@ function BlackJack(){
         reEnableButtons();
         self.all_players_bet();
         $('#reset_butt').addClass('disabled');
-    }
+        this.roundOver = false;
+    };
    this.compare_score =  function(){
        var dealer_win = true;
        $('#modal').text('');
@@ -63,8 +64,9 @@ function BlackJack(){
             if (self.players_array[i].score > self.players_array[0].score) {     // && !self.players_array[i].bust
                 self.payout(self.players_array[i]);
                 console.log(self.players_array[i], " has won!");
-                var player_that_won = $('<p>').text('Player ' + i + ' has won!')
+                var player_that_won = $('<p>').text('Player ' + i + ' has won!').css("font-size", "0.75em").css("color", "black");
                 $('#modal').css('display', 'block').append(player_that_won);
+                messageHandler.logMessage('Player ' + i + ' has won!');
                 dealer_win = false;
             }
             else {
@@ -76,12 +78,15 @@ function BlackJack(){
         }
         if(dealer_win){
             $('#modal').css('display','block').text('Dealer Wins!');
+            messageHandler.logMessage("Dealer Wins!");
         }
         for(var i =0; i<self.players_array.length; i++){
             self.players_array[i].hand = [];
             self.players_array[i].bust = false;
             }
-       game.changePlayerTurn();
+        if(this.playerTurn !== 0){
+            game.changePlayerTurn();
+        }
         disableAllbuttons();
        $('#reset_butt').removeClass('disabled');
    };
@@ -107,6 +112,11 @@ function BlackJack(){
         $('#player_number').text(self.playerTurn);
         var number_of_players = $('input[name=playerNum]:checked').val();
         self.addplayers(1 + parseInt(number_of_players));
+        for(var i = 1; i <= number_of_players; i++){
+            var divID = "#player" + i + "ChipsText"
+            $(divID).show();
+        }
+
         var new_deck =  new CreateDeck();
         self.deck = new_deck.make_deck();
         self.end_round();
@@ -150,6 +160,12 @@ function View(){
         var dealersFirstCard = game.players_array[0].hand[0];
         var cardImage = "images/" + dealersFirstCard.value + "_" + dealersFirstCard.suit + ".png";
         $(".hiddenCard").css("background-image", 'url(' + cardImage + ')')
+    };
+    this.updatePlayerChips = function(){
+        for(var i = 1; i < game.players_array.length; i++){
+            var divID = "#player" + i + "Chips";
+            $(divID).text(game.players_array[i].chips);
+        }
     }
 }
 function AudioHandler(){

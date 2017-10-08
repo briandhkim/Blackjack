@@ -34,7 +34,7 @@ function Player(){
                 setTimeout(make_modals_disappear,1000);
             }
             else{
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!")
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!");
                 view.revealDealerCard();
             }
         }
@@ -57,14 +57,14 @@ function Player(){
         if(self.score === 21 && game.playerTurn!==0 && game.gameStarted===false){
             self.stay();
             if (self.ID !== 0) {
-                $('#modal').css('display', 'block').text('21!').css("color", "green");
+                $('#modal').css('display', 'block').text('21!').css("color", "black");
                 $('#modal_overlay').css('display', 'block');
                 setTimeout(make_modals_disappear, 1000);
             }
         }
         if(self.hand.length>2 && self.score !== 21){
             if(self.ID !== 0 || self.score > 21) {//keep dealer score hidden until the end
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + self.score);
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + self.score + ".");
             }
         }
         self.check_bust();
@@ -79,7 +79,7 @@ function Player(){
         this.staying = true;
         if(this.score <= 21) {
             if(this.ID === 0){
-                messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.");
                 view.revealDealerCard();
                 // game.compare_score();
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score +".")
@@ -118,6 +118,7 @@ function Player(){
                 var new_deck =  new CreateDeck();
                 game.deck = new_deck.make_deck();
             }
+            view.updatePlayerChips();
         }
     }
     // var recorderVid = $('<iframe>',{
