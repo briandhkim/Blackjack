@@ -30,7 +30,7 @@ function BlackJack(){
         var oldPlayerDiv = "#player_" + (this.playerTurn);
         $(oldPlayerDiv).css("border", "1px dashed blue").addClass("overlay");
         if(this.playerTurn !== this.players_array.length-1){
-            this.playerTurn+=1;
+            self.playerTurn+=1;
         }
         else{
             self.playerTurn = 0;
@@ -81,6 +81,7 @@ function BlackJack(){
             self.players_array[i].bust = false;
             }
         }
+        game.changePlayerTurn();
         disableAllbuttons();
        $('#reset_butt').removeClass('disabled');
    };

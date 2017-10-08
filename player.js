@@ -32,12 +32,12 @@ function Player(){
 
                 $('#modal_overlay').css('display','block');
                 setTimeout(make_modals_disappear,1000);
+                self.stay();
             }
             else{
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "BUSTED!")
                 view.revealDealerCard();
             }
-            self.stay();
         }
     };
     this.calculator_score = function(){
@@ -91,14 +91,14 @@ function Player(){
     this.dealerAI = function(){
         console.log("Dealer AI");
         if(this.ID === 0){
-            this.calculator_score();
+            game.players_array[0].calculator_score();
             var highestScore = game.players_array[1].score;
             for(var i = 2; i <game.players_array.length; i++){
                 if(game.players_array[i].score > highestScore){
                     highestScore = game.players_array[i].score;
                 }
             }
-            while(this.score < highestScore && this.score !== 0){
+            while(game.players_array[0].score < highestScore && this.score !== 0){
                 console.log(this.score);
                 this.get_card();
             }
