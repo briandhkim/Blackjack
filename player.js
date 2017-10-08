@@ -40,6 +40,35 @@ function Player(){
             self.stay();
         }
     };
+    // this.calculator_score_start = function(){
+    //     self.score = 0;
+    //     for(var i = 0; i<self.hand.length; i++){
+    //         if(self.hand[i].value>10){
+    //             self.score += 10;
+    //         }
+    //         else{
+    //             self.score += this.hand[i].value;
+    //         }
+    //     }
+    //     for(var i = 0; i<self.hand.length; i++){//convert Ace to 11 or 1
+    //         if(self.hand[i].value === 1 && self.score<=11){
+    //             self.score += 10;
+    //         }
+    //     }
+    //     if(self.score === 21){
+    //         self.stay();
+    //         if (self.ID !== 0) {
+    //             $('#modal').css('display', 'block').text('21!').css("color", "green");
+    //             $('#modal_overlay').css('display', 'block');
+    //             setTimeout(make_modals_disappear, 1000);
+    //         }
+    //     }
+        if(this.hand.length>2 && this.score !== 21){
+            if(this.ID !== 0 || this.score > 21) {//keep dealer score hidden until the end
+                messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score);
+            }
+        }
+    }
     this.calculator_score = function(){
         self.score = 0;
         for(var i = 0; i<self.hand.length; i++){
@@ -79,7 +108,7 @@ function Player(){
             if(this.ID === 0){
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Turn over.")
                 view.revealDealerCard();
-                game.compare_score();
+                // game.compare_score();
                 messageHandler.logMessage(messageHandler.currentPlayerString() + "Has " + this.score +".")
             }
             else{
@@ -106,6 +135,7 @@ function Player(){
             if(this.score >= highestScore){
                 console.log("DEALER WINS");
                 console.log(highestScore)
+                game.changePlayerTurn();
             }
             else{
                 console.log("non busted people win!");

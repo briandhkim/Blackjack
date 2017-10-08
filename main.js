@@ -39,7 +39,6 @@ function BlackJack(){
         $(newPlayerDiv).css("border", "5px solid gold").removeClass("overlay");
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.")
         $('#player_number').text(this.playerTurn);
-
         if(self.playerTurn ===0){
             $('#player_number').text('Dealer'); 
             $('.cpuText').addClass('dealerTurnText');
@@ -47,7 +46,6 @@ function BlackJack(){
         }else if(self.playerTurn >0){
             $('#player_number').text(self.playerTurn);
             $('.cpuText').removeClass('dealerTurnText');
-
         }
     };
     this.end_round = function(){
@@ -55,6 +53,7 @@ function BlackJack(){
         self.deal_cards();
         make_modals_disappear();
         reEnableButtons();
+        self.all_players_bet();
     }
    this.compare_score =  function(){
        var dealer_win = true;
@@ -67,6 +66,11 @@ function BlackJack(){
                 $('#modal').css('display','block').append(player_that_won);
                 dealer_win = false;
             }
+            else{
+                if(self.players_array[i].chips<=0) {
+                    self.players_array.splice(i, 1);
+                    i--;
+                }
         }
         if(dealer_win){
             $('#modal').css('display','block').text('Dealer Wins!');
@@ -74,10 +78,16 @@ function BlackJack(){
         for(var i =0; i<self.players_array.length; i++){
             self.players_array[i].hand = [];
             self.players_array[i].bust = false;
+            }
         }
         disableAllbuttons();
         setTimeout(self.end_round,3000);
    };
+    this.all_players_bet = function(){
+        for(var i = 1; i<game.players_array.length;i++){
+            game.players_array[i].bet();
+        }
+    };
     this.start_game = function(){
         $('#draw_card').removeClass('disabled');
         $('#stay').removeClass('disabled');
@@ -95,6 +105,7 @@ function BlackJack(){
         console.log(this.deck);
         messageHandler.logMessage("Game started.  Good luck!");
         $('#start_butt').addClass('disabled');
+        this.all_players_bet();
         messageHandler.logMessage(messageHandler.currentPlayerString() + "It's your turn.");
         $("#player_" + (this.playerTurn)).css("border", "5px solid gold").removeClass("overlay");
         this.players_array[this.playerTurn].calculator_score();
