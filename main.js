@@ -87,9 +87,9 @@ function BlackJack(){
             self.players_array[i].hand = [];
             self.players_array[i].bust = false;
             }
-        if(this.playerTurn !== 0){
-            game.changePlayerTurn();
-        }
+        // if(this.playerTurn !== 0){
+       game.changePlayerTurn();
+        // }
         disableAllbuttons();
        $('#reset_butt').removeClass('disabled');
    };
