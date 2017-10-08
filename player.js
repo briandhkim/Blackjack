@@ -113,6 +113,10 @@ function Player(){
                 console.log(highestScore)
             }
             game.compare_score();
+            if(game.deck.length<20){
+                var new_deck =  new CreateDeck();
+                game.deck = new_deck.make_deck();
+            }
         }
     }
     // var recorderVid = $('<iframe>',{
