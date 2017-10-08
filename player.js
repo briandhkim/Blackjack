@@ -70,7 +70,9 @@ function Player(){
         self.check_bust();
         if(self.bust){
             self.score = 0;
-            this.stay();
+            if(!game.players_array[0].bust){
+                this.stay();
+            }
         }
     };
     this.stay = function(){
