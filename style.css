@@ -96,6 +96,7 @@ body > .container-fluid{
 	background-position: center;
 	background-repeat: no-repeat;
 	opacity: 0.85;
+	font-family: 'Permanent Marker', cursive;
 }
 .playersArea{
 	height: 37%;
