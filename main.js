@@ -55,6 +55,7 @@ function BlackJack(){
         reEnableButtons();
         self.all_players_bet();
         $('#reset_butt').addClass('disabled');
+        $("#player_" + (this.playerTurn)).css("border", "5px solid gold").removeClass("overlay");
         this.roundOver = false;
     };
    this.compare_score =  function(){
