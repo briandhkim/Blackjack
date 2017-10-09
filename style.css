@@ -128,10 +128,11 @@ body > .container-fluid{
 	border-style: double;
 	margin-left: 5px;
 	margin-right: 5px;
+	font-family: 'Patrick Hand SC', cursive;
 }
 .messageArea, .playerChipsArea{
 	height: 100%;
-	border: 1px solid orange;
+	/*border: 1px solid orange;*/
 	overflow: auto;
 	font-size: 25px;
 	color:white;
@@ -146,17 +147,23 @@ body > .container-fluid{
 }
 
 .messageArea::-webkit-scrollbar{
-	width: 5px;
-	height: 6px;
-	background-color: blue;
-	border: 1px solid white;
+	width: 10px;
+	background-color: rgba(255,213,79,0.1);
+}
+.messageArea::-webkit-scrollbar-thumb{
+	width: 8px;
+	border-radius:15px;
+	background-color: #03a9f4;
+}
+.messageArea::-webkit-scrollbar-track-piece{
+
 }
 ul#messageList{
 	list-style: none;
 	font-size: 18.5px;
 	/*color:#4db6ac;*/
 	color:whitesmoke;
-	font-family: 'Patrick Hand SC', cursive;
+	
 }
 #modal{
 	left:50%;

@@ -191,7 +191,7 @@ function MessageHandler(){
     this.messages = [];
     this.logMessage = function(message){
         this.messages.unshift(message);
-        if(this.messages.length > 5){
+        if(this.messages.length > 10){
             this.messages.pop();
         }
         for(var i = 0; i < this.messages.length; i++){
