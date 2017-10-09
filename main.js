@@ -1,6 +1,7 @@
 function make_modals_disappear(){
     $('#modal').css('display','none').text('');
     $('#modal_overlay').css('display','none');
+    $('#reset_butt').removeClass('tada infinite')
     // $('#modal').text('');
 }
 function BlackJack(){
@@ -92,7 +93,7 @@ function BlackJack(){
        game.changePlayerTurn();
         // }
         disableAllbuttons();
-       $('#reset_butt').removeClass('disabled');
+       $('#reset_butt').removeClass('disabled').addClass('tada infinite');
    };
     this.all_players_bet = function(){
         for(var i = 1; i<self.players_array.length;i++){
