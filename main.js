@@ -73,12 +73,12 @@ function BlackJack(){
                 messageHandler.logMessage('Player ' + i + ' has won!');
                 dealer_win = false;
             }
-            else {
-                if (self.players_array[i].chips <= 0) {
-                    self.players_array.splice(i, 1);
-                    i--;
-                }
-            }
+            // else {
+            //     if (self.players_array[i].chips <= 0) {
+            //         self.players_array.splice(i, 1);
+            //         i--;
+            //     }
+            // }
         }
         if(dealer_win){
             $('#modal').css('display','block').text('The House Wins!').css("font-size", "3em");
